@@ -1,0 +1,14 @@
+{
+    "name": "Articon",
+    "version": "1.0.0",
+    "description": "Your project description",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "authors": "Ari Anguiano, Binette Maggio, Louis Kuczykowski, Michael Mann",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {}
+  }
