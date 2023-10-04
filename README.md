@@ -1,7 +1,6 @@
 # Scratch Project
 
-A resource for finding 
+A resource to express yourself using masterpieces of art.
 
-## Installation
 
 
