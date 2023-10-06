@@ -26,24 +26,24 @@ app.use(cookieParser());
 
 //MongoDB Connection stuff.
 //Binette, we'll need to update this URL. I'm not quite sure how it works for you, since you used Compass and not a local DB.
-mongoose.connect('mongodb://localhost/FortuneApp', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+// mongoose.connect('mongodb://localhost/FortuneApp', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// });
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-db.on('connected', () => {
-    console.log('Connected to MongoDB');
-});
+// db.on('connected', () => {
+//     console.log('Connected to MongoDB');
+// });
 
-db.on('error', (err) => {
-    console.error('Error connecting to MongoDB:', err);
-});
+// db.on('error', (err) => {
+//     console.error('Error connecting to MongoDB:', err);
+// });
 
-db.on('disconnected', () => {
-    console.log('Disconnected from MongoDB');
-});
+// db.on('disconnected', () => {
+//     console.log('Disconnected from MongoDB');
+// });
 
 
 
@@ -68,6 +68,6 @@ app.use((err, req, res, next) => {
 })
 app.listen(PORT, () => { console.log(`Listening on port ${PORT}...`); });
 
-
+console.log('testing 123')
 
 
