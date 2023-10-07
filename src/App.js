@@ -2,18 +2,20 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import Home from "./components/Home.jsx";
+import LandingPages from "./components/LandingPages.jsx";
+import Main from "./components/Main.jsx"
 import "../client/styles.css";
+
 
 
 const App = () => (
   <div className="App">
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route path="*" element={<LandingPages />}></Route>
+      <Route path="/main/*" element={<Main />}></Route>
     </Routes>
   </div>
   );
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
