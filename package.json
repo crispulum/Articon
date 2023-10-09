@@ -16,6 +16,7 @@
     "dependencies": {
         "@babel/preset-env": "^7.22.15",
         "@babel/register": "^7.22.15",
+        "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.6",
         "css-loader": "^6.8.1",
         "eslint": "^8.50.0",

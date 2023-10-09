@@ -7,6 +7,10 @@ const artSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    artist: {
+        type: String,
+        default: 'unknown (probably an error)'
+    },
     year: {
         type: Number,
         default: 2023,
@@ -19,9 +23,9 @@ const artSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    thumbnail_url: {
+    thumbnailURL: {
         type: String,
-        required: true,
+        required: true
     },
     score: {
         type: Number,
@@ -29,13 +33,15 @@ const artSchema = new mongoose.Schema({
     },
     emotion: {
         type: String,
-        required: true,
+        default: 'Happy'
     },
     submitted_by: {
         type: String,
         required: true,
     },
 });
+
+
 
 const art = mongoose.model('art', artSchema);
 

@@ -15,8 +15,8 @@ const app = express();
 
 
 //custom packages
-
-//e.g. we import our models, controllers, and routes here
+const artApiRouter = require('./routes/artApi')
+//e.g. we import our routes here
 
 
 
@@ -26,24 +26,24 @@ app.use(cookieParser());
 
 //MongoDB Connection stuff.
 //Binette, we'll need to update this URL. I'm not quite sure how it works for you, since you used Compass and not a local DB.
-// mongoose.connect('mongodb://localhost/FortuneApp', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// });
+mongoose.connect('mongodb://localhost/FortuneApp', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-// const db = mongoose.connection;
+const db = mongoose.connection;
 
-// db.on('connected', () => {
-//     console.log('Connected to MongoDB');
-// });
+db.on('connected', () => {
+    console.log('Connected to MongoDB');
+});
 
-// db.on('error', (err) => {
-//     console.error('Error connecting to MongoDB:', err);
-// });
+db.on('error', (err) => {
+    console.error('Error connecting to MongoDB:', err);
+});
 
-// db.on('disconnected', () => {
-//     console.log('Disconnected from MongoDB');
-// });
+db.on('disconnected', () => {
+    console.log('Disconnected from MongoDB');
+});
 
 
 
@@ -53,6 +53,8 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
+
+app.use('/art', artApiRouter)
 
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 
