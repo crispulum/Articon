@@ -1,4 +1,7 @@
-
+body {
+    margin: 0;
+    padding: 0;
+}
 
 .home {
     height: 100vh;
@@ -6,6 +9,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url("https://images.unsplash.com/photo-1569533816166-49d08c516a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+    background-size: 100% 100%;
 }
 
 .main-container{
@@ -14,10 +19,14 @@
     justify-content: center;
     align-items: center;
     margin-top: 15rem;
+    text-align: center;
 }
 
 .main-container h1{
-    font-size: 6rem;
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 8rem;
+    /* margin-left: 4rem; */
 }
 
 .main-container input {
@@ -28,3 +37,4 @@
     border: solid black 0.1rem;
     font-size: 1rem;
 }
+
