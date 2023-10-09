@@ -1,13 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import LandingPages from "./components/LandingPages.jsx";
+import Main from "./components/Main.jsx"
+import "../client/styles.css";
+
+
 
 const App = () => (
-  <div>
-    <h1>Articon Baby!!</h1>
+  <div className="App">
+    <Routes>
+      <Route path="*" element={<LandingPages />}></Route>
+      <Route path="/main/*" element={<Main />}></Route>
+    </Routes>
   </div>
   );
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const root = ReactDOM.createRoot(document.getElementById("root"))
-
-root.render(<App />)
+root.render(
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
+);
