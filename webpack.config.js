@@ -6,9 +6,9 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: "./src/App.js",
   output: {
-    path: path.join(__dirname, "/build"),
     filename: "bundle.js",
-    publicPath: "/",
+    path: path.join(__dirname, "/build"),
+    publicPath: "/"
   },
   devServer: {
     // static: {
@@ -56,9 +56,9 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader, file-loader"
           },
-        ],
+        ]
       },
     ],
   },
