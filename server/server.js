@@ -53,7 +53,7 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-app.use('/', artApiRouter)
+app.use('/art', artApiRouter)
 
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 

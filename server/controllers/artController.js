@@ -1,197 +1,14 @@
 const cheerio = require('cheerio');
 const Art = require('../models/artModel');
-
+//in a general sense, i'm sorry if you have to read this. a lot of these queries are annoying webscraping that makes no sense without the context of how the pages I'm scraping are structured.
+//you can sort of just assume it works, as it mostly does. if you have a better idea than scraping wikipedia for this information, I would LOVE to hear it.
 const artController = {
 
 
-    //no longer using this but im keeping it in case I need it
-    // async testFindArt() {
-    //     try {
-
-    //         const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
-    //         const searchQuery = "The_Lament_For_Icarus_Draper"; // query text
-    //         const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
-
-    //         const searchResponse = await fetch(searchUrl);
-    //         const searchData = await searchResponse.json();
-
-
-    //         if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
-    //             const firstResult = searchData.query.search[0];
-    //             const imageTitle = firstResult.title;
-
-    //             const imageUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageTitle)}`;
-    //             const fileUrl = `https://commons.wikimedia.org/wiki/${encodeURIComponent(imageTitle)}`;
-
-    //             const fileResponse = await fetch(fileUrl);
-    //             const fileContent = await fileResponse.text();
-    //             const $ = cheerio.load(fileContent);
-
-    //             const summaryBox = $('.fileinfotpl-type-artwork');
-
-    //             if (summaryBox) {
-
-
-    //                 function isElementVisible(element) {
-    //                     return element.css('display') !== 'none';
-    //                 }
-    //                 // helper function to filter out invisible divs, that exist for some inexplicable reason. 
-
-
-    //                 //stupid logic to fetch the medium text.
-    //                 const mediumContainer = summaryBox.find('#fileinfotpl_art_medium').next();
-    //                 if (mediumContainer.length > 0) {
-    //                     const divs = mediumContainer.children()
-    //                     divs.each((index, divElement) => {
-    //                         const div = $(divElement);
-    //                         if (isElementVisible(div)) {
-    //                             const medium = div.text().trim();
-    //                         }
-    //                     });
-    //                 }
-
-    //                 //stupid logic to fetch the date text.
-    //                 const dateContainer = summaryBox.find('#fileinfotpl_date');
-    //                 if (dateContainer.length > 0) {
-    //                     const divs = dateContainer.next()
-    //                     divs.each((index, divElement) => {
-    //                         const div = $(divElement);
-    //                         if (isElementVisible(div)) {
-    //                             const content = div.text().trim();
-    //                             const inputString = content;
-    //                             const regexPattern = /\d{4}/; //  regex pattern for four consecutive digits
-
-    //                             const match = inputString.match(regexPattern);
-
-    //                             if (match) {
-    //                                 date = match[0];
-
-    //                             }
-    //                         }
-    //                     });
-    //                 }
-
-    //                 const inputtedArtist = 'Test Artist';
-    //                 const submitted_by = 'ari';
-
-    //                 const newArt = new Art({
-    //                     title: imageTitle,
-    //                     artist: inputtedArtist,
-    //                     year: date,
-    //                     url: imageUrl,
-    //                     medium: medium,
-    //                     submitted_by: submitted_by,
-    //                 });
-
-    //                 const savedNewArt = await newArt.save();
-    //                 response.locals.newArt = savedNewArt;
-    //                 return next();
-    //             }
-    //         } else {
-    //             console.error("No media files found.");
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log('error in art creation: ' + error)
-    //         return next({ error: 'error in art creation' })
-    //     }
-
-    // },
-
-    // async testFindArt() {
-    //     try {
-
-    //         const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
-    //         const searchQuery = "The_Lament_For_Icarus_Draper"; // query text
-    //         const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
-
-    //         const searchResponse = await fetch(searchUrl);
-    //         const searchData = await searchResponse.json();
-
-
-    //         if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
-    //             const firstResult = searchData.query.search[0];
-    //             const imageTitle = firstResult.title;
-
-    //             const imageUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageTitle)}`;
-    //             const fileUrl = `https://commons.wikimedia.org/wiki/${encodeURIComponent(imageTitle)}`;
-
-    //             const fileResponse = await fetch(fileUrl);
-    //             const fileContent = await fileResponse.text();
-    //             const $ = cheerio.load(fileContent);
-
-    //             const summaryBox = $('.fileinfotpl-type-artwork');
-
-    //             if (summaryBox) {
-
-
-    //                 function isElementVisible(element) {
-    //                     return element.css('display') !== 'none';
-    //                 }
-    //                 // helper function to filter out invisible divs, that exist for some inexplicable reason. 
-
-
-    //                 //stupid logic to fetch the medium text.
-    //                 const mediumContainer = summaryBox.find('#fileinfotpl_art_medium').next();
-    //                 if (mediumContainer.length > 0) {
-    //                     const divs = mediumContainer.children()
-    //                     divs.each((index, divElement) => {
-    //                         const div = $(divElement);
-    //                         if (isElementVisible(div)) {
-    //                             const medium = div.text().trim();
-    //                         }
-    //                     });
-    //                 }
-
-    //                 //stupid logic to fetch the date text.
-    //                 const dateContainer = summaryBox.find('#fileinfotpl_date');
-    //                 if (dateContainer.length > 0) {
-    //                     const divs = dateContainer.next()
-    //                     divs.each((index, divElement) => {
-    //                         const div = $(divElement);
-    //                         if (isElementVisible(div)) {
-    //                             const content = div.text().trim();
-    //                             const inputString = content;
-    //                             const regexPattern = /\d{4}/; //  regex pattern for four consecutive digits
-
-    //                             const match = inputString.match(regexPattern);
-
-    //                             if (match) {
-    //                                 date = match[0];
-
-    //                             }
-    //                         }
-    //                     });
-    //                 }
-
-    //                 const inputtedArtist = 'Test Artist';
-    //                 const submitted_by = 'ari';
-
-    //                 const newArt = new Art({
-    //                     title: imageTitle,
-    //                     artist: inputtedArtist,
-    //                     year: date,
-    //                     url: imageUrl,
-    //                     medium: medium,
-    //                     submitted_by: submitted_by,
-    //                 });
-
-    //                 const savedNewArt = await newArt.save();
-    //                 response.locals.newArt = savedNewArt;
-    //                 return next();
-    //             }
-    //         } else {
-    //             console.error("No media files found.");
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log('error in art creation: ' + error)
-    //         return next({ error: 'error in art creation' })
-    //     }
-
-    // },
+    
     //im very sorry about this, I tried my best to make it readable :)
-    async trueQueryArt(request, response, next) {
+
+    async queryArt(request, response, next) {
         try {
             const queryString = request.body.queryString;
 
@@ -200,6 +17,7 @@ const artController = {
             }
             const pageName = await (findPageTitle(queryString));
             const prelimArtObj = await parsePageHTML(pageName);
+            // this grabs info off the wikipedia page's infobox.
             response.locals.artObj = prelimArtObj;
             return next();
         } catch (error) {
@@ -211,6 +29,7 @@ const artController = {
 
     async getBigImage(request, response, next) {
         try {
+            //here, we query wikimedia to try to get a higher resolution image, as well as any information not in the wikipedia infobox.
             const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
             const searchQueryQ = request.body.queryString;
             const searchQuery = searchQueryQ.replace(/ /g, '_');
@@ -249,7 +68,7 @@ const artController = {
                     if (!response.locals.artObj.hasOwnProperty('Year')) {
                         const dateContainer = summaryBox.find('#fileinfotpl_date');
                         if (dateContainer.length > 0) {
-                           
+
                             const divs = dateContainer.next()
                             divs.each((index, divElement) => {
                                 const div = $(divElement);
@@ -257,7 +76,7 @@ const artController = {
                                     const content = div.text().trim();
                                     const inputString = content;
                                     const regexPattern = /\d{4}/; //four consecutive digits - we may have issues if something was made before 1000CE
-
+                                    //I can't decided if we should keep this - it helps for finding a date, but it often erases date ranges. hmmmmmmm.
                                     const match = inputString.match(regexPattern);
 
                                     if (match) {
@@ -275,7 +94,8 @@ const artController = {
                     }
                     if (!response.locals.artObj.hasOwnProperty('Artist')) {
                         const artistContainer = summaryBox.find('#creator');
-                        response.locals.artObj.Artist =  artistContainer.children().first().text().trim();
+                        //may or may not work in all cases. it's fairly rare that this comes up, though. 
+                        response.locals.artObj.Artist = artistContainer.children().first().text().trim();
                     }
                 }
             }
@@ -289,10 +109,29 @@ const artController = {
             next(error)
         }
     },
-
+    //NB - we should probably send this info back to the user & let them modify it before we save it tbh
+    //I just don't want to make the frontend girlies do that :)
+    //also this should very obviously be in postgres.... but I'm lazy?
     async saveNewArt(request, response, next) {
         try {
             console.log(response.locals.artObj)
+
+            const newPendingArt = new Art({
+
+                title: response.locals.artObj.title,
+                artist: response.locals.artObj.Artist,
+                year: response.locals.artObj.Year,
+                medium: response.locals.artObj.Medium,
+                thumbnailURL: response.locals.artObj.thumbnailUrl,
+                url: response.locals.artObj.bigUrl,
+                emotion: request.body.emotion,
+                submitted_by: request.body.submitted_by
+
+
+
+            })
+            console.log(newPendingArt)
+            await newPendingArt.save()
             return next()
         } catch (error) {
             console.log('error in saveNewArt: ' + error)
@@ -316,25 +155,17 @@ const artController = {
     async vote(request, response, next) {
         try {
             scoreVal = request.body.score;
-            Art.findOneAndUpdate({ _id: request.body.id }, { $inc: { score: scoreVal } })
+            const votedUpon = await Art.findOneAndUpdate({ _id: request.body.id }, { $inc: { score: scoreVal }, }, { new: true })
+            response.locals.voted = votedUpon;
             return next()
         } catch (error) {
             console.log('error in voting: ' + error)
             return next({ error: 'error in voting' })
         }
     },
-
-    async testMW(request, response, next) {
-        try {
-            console.log('middleware =)')
-            return next()
-        } catch (error) {
-            console.log('error in testMW: ' + error)
-            return next({ error: 'error in testMW' })
-        }
-    }
 }
-
+// these are two helper funcitons to ensure that trueQueryArt is less horrid.
+//future programmers, these can probably be sent off to some utils folder.
 async function parsePageHTML(pageName) {
     try {
         const dataArray = ['Artist', 'Year', 'Medium']
@@ -343,7 +174,7 @@ async function parsePageHTML(pageName) {
         }
         const pageNameWithUnderscores = pageName.replace(/ /g, '_');
         const url = `https://api.wikimedia.org/core/v1/wikipedia/en/page/${encodeURIComponent(pageNameWithUnderscores)}/html`;
-       // console.log(url)
+        // console.log(url)
 
         const response = await fetch(url)
         const responseText = await response.text();
@@ -369,6 +200,7 @@ async function parsePageHTML(pageName) {
     }
     catch (error) {
         console.error('error in parsePageHTML ' + error);
+       // return next(error)
     }
 }
 
@@ -380,7 +212,7 @@ async function findPageTitle(query) {
         const headers = {
             //lol we need to get this token eventually or wikipedia will be mad
             // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN',
-            'User-Agent': 'Articons'
+            'User-Agent': 'Articons - crispulum@gmail.com'
         };
         const baseUrl = 'https://api.wikimedia.org/core/v1/wikipedia/';
         const endpoint = '/search/page';
@@ -401,6 +233,7 @@ async function findPageTitle(query) {
         return data.pages[0].title;
     } catch (error) {
         console.error('error in findPageTitle ' + error);
+       // return next(error)
     }
 }
 

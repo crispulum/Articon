@@ -12,7 +12,7 @@ const artSchema = new mongoose.Schema({
         default: 'unknown (probably an error)'
     },
     year: {
-        type: Number,
+        type: String,
         default: 2023,
     },
     medium: {

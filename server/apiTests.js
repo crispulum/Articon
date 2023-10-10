@@ -247,3 +247,192 @@ async function queryArt(request, response, next) {
 }
 
 )()
+
+
+
+//no longer using this but im keeping it in case I need it
+    // async testFindArt() {
+    //     try {
+
+    //         const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
+    //         const searchQuery = "The_Lament_For_Icarus_Draper"; // query text
+    //         const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
+
+    //         const searchResponse = await fetch(searchUrl);
+    //         const searchData = await searchResponse.json();
+
+
+    //         if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
+    //             const firstResult = searchData.query.search[0];
+    //             const imageTitle = firstResult.title;
+
+    //             const imageUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageTitle)}`;
+    //             const fileUrl = `https://commons.wikimedia.org/wiki/${encodeURIComponent(imageTitle)}`;
+
+    //             const fileResponse = await fetch(fileUrl);
+    //             const fileContent = await fileResponse.text();
+    //             const $ = cheerio.load(fileContent);
+
+    //             const summaryBox = $('.fileinfotpl-type-artwork');
+
+    //             if (summaryBox) {
+
+
+    //                 function isElementVisible(element) {
+    //                     return element.css('display') !== 'none';
+    //                 }
+    //                 // helper function to filter out invisible divs, that exist for some inexplicable reason. 
+
+
+    //                 //stupid logic to fetch the medium text.
+    //                 const mediumContainer = summaryBox.find('#fileinfotpl_art_medium').next();
+    //                 if (mediumContainer.length > 0) {
+    //                     const divs = mediumContainer.children()
+    //                     divs.each((index, divElement) => {
+    //                         const div = $(divElement);
+    //                         if (isElementVisible(div)) {
+    //                             const medium = div.text().trim();
+    //                         }
+    //                     });
+    //                 }
+
+    //                 //stupid logic to fetch the date text.
+    //                 const dateContainer = summaryBox.find('#fileinfotpl_date');
+    //                 if (dateContainer.length > 0) {
+    //                     const divs = dateContainer.next()
+    //                     divs.each((index, divElement) => {
+    //                         const div = $(divElement);
+    //                         if (isElementVisible(div)) {
+    //                             const content = div.text().trim();
+    //                             const inputString = content;
+    //                             const regexPattern = /\d{4}/; //  regex pattern for four consecutive digits
+
+    //                             const match = inputString.match(regexPattern);
+
+    //                             if (match) {
+    //                                 date = match[0];
+
+    //                             }
+    //                         }
+    //                     });
+    //                 }
+
+    //                 const inputtedArtist = 'Test Artist';
+    //                 const submitted_by = 'ari';
+
+    //                 const newArt = new Art({
+    //                     title: imageTitle,
+    //                     artist: inputtedArtist,
+    //                     year: date,
+    //                     url: imageUrl,
+    //                     medium: medium,
+    //                     submitted_by: submitted_by,
+    //                 });
+
+    //                 const savedNewArt = await newArt.save();
+    //                 response.locals.newArt = savedNewArt;
+    //                 return next();
+    //             }
+    //         } else {
+    //             console.error("No media files found.");
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log('error in art creation: ' + error)
+    //         return next({ error: 'error in art creation' })
+    //     }
+
+    // },
+
+    // async testFindArt() {
+    //     try {
+
+    //         const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
+    //         const searchQuery = "The_Lament_For_Icarus_Draper"; // query text
+    //         const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
+
+    //         const searchResponse = await fetch(searchUrl);
+    //         const searchData = await searchResponse.json();
+
+
+    //         if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
+    //             const firstResult = searchData.query.search[0];
+    //             const imageTitle = firstResult.title;
+
+    //             const imageUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(imageTitle)}`;
+    //             const fileUrl = `https://commons.wikimedia.org/wiki/${encodeURIComponent(imageTitle)}`;
+
+    //             const fileResponse = await fetch(fileUrl);
+    //             const fileContent = await fileResponse.text();
+    //             const $ = cheerio.load(fileContent);
+
+    //             const summaryBox = $('.fileinfotpl-type-artwork');
+
+    //             if (summaryBox) {
+
+
+    //                 function isElementVisible(element) {
+    //                     return element.css('display') !== 'none';
+    //                 }
+    //                 // helper function to filter out invisible divs, that exist for some inexplicable reason. 
+
+
+    //                 //stupid logic to fetch the medium text.
+    //                 const mediumContainer = summaryBox.find('#fileinfotpl_art_medium').next();
+    //                 if (mediumContainer.length > 0) {
+    //                     const divs = mediumContainer.children()
+    //                     divs.each((index, divElement) => {
+    //                         const div = $(divElement);
+    //                         if (isElementVisible(div)) {
+    //                             const medium = div.text().trim();
+    //                         }
+    //                     });
+    //                 }
+
+    //                 //stupid logic to fetch the date text.
+    //                 const dateContainer = summaryBox.find('#fileinfotpl_date');
+    //                 if (dateContainer.length > 0) {
+    //                     const divs = dateContainer.next()
+    //                     divs.each((index, divElement) => {
+    //                         const div = $(divElement);
+    //                         if (isElementVisible(div)) {
+    //                             const content = div.text().trim();
+    //                             const inputString = content;
+    //                             const regexPattern = /\d{4}/; //  regex pattern for four consecutive digits
+
+    //                             const match = inputString.match(regexPattern);
+
+    //                             if (match) {
+    //                                 date = match[0];
+
+    //                             }
+    //                         }
+    //                     });
+    //                 }
+
+    //                 const inputtedArtist = 'Test Artist';
+    //                 const submitted_by = 'ari';
+
+    //                 const newArt = new Art({
+    //                     title: imageTitle,
+    //                     artist: inputtedArtist,
+    //                     year: date,
+    //                     url: imageUrl,
+    //                     medium: medium,
+    //                     submitted_by: submitted_by,
+    //                 });
+
+    //                 const savedNewArt = await newArt.save();
+    //                 response.locals.newArt = savedNewArt;
+    //                 return next();
+    //             }
+    //         } else {
+    //             console.error("No media files found.");
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log('error in art creation: ' + error)
+    //         return next({ error: 'error in art creation' })
+    //     }
+
+    // },
