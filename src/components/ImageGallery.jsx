@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
+
 import Thumbnail from './Thumbnail';
 import Lightbox from './Lightbox';
-import React, { useState } from 'react';
+import AddArtComponent from './AddArtComponent';
 
 
 /*
@@ -84,6 +86,7 @@ function ImageGallery() {
             onClick={() => handleImageClick(art)}
           />
         ))}
+        <AddArtComponent/>
         {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseLightbox} />}
       </div>
     );
