@@ -3,6 +3,23 @@ import Lightbox from './Lightbox';
 import React, { useState } from 'react';
 
 
+/*
+Image Gallery component needs in an array of objects structured as follows:
+[
+    {
+        title: 'The Birth of Venus',
+        artist: 'Sandro Botticelli',
+        year: 1486,
+        medium: 'tempera on canvas',
+        url: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/The_Birth_of_Venus_%28Botticelli%29_1.jpg',
+        score: 4,
+        emotion: 'Happy',
+        submitted_by: 'Binette',
+    }
+]
+
+*/
+
 const artArray = [
     {
         title: 'The Birth of Venus',
@@ -47,8 +64,9 @@ const artArray = [
 ];
 
 function ImageGallery() {
+    const [pictureData, setPictureData] = useState(null)
     const [selectedImage, setSelectedImage] = useState(null);
-  
+
     const handleImageClick = (image) => {
       setSelectedImage(image);
     };
@@ -59,14 +77,14 @@ function ImageGallery() {
   
     return (
       <div className="image-gallery">
-        {artArray.map((image, index) => (
+        {artArray.map((art, index) => (
           <Thumbnail
             key={index}
-            image={image}
-            onClick={() => handleImageClick(image)}
+            art={art}
+            onClick={() => handleImageClick(art)}
           />
         ))}
-        {selectedImage && <Lightbox image={selectedImage} onClose={handleCloseLightbox} />}
+        {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseLightbox} />}
       </div>
     );
   }

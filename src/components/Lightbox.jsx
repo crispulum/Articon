@@ -1,16 +1,16 @@
 import React from 'react';
 
-function Lightbox({ image, onClose }) {
+function Lightbox({ art, onClose }) {
   return (
     <div className="lightbox">
       <div className="lightbox-content">
-        <img src={image.url} alt={image.title} />
+        <img src={art.url} alt={art.title} loading="lazy"/>
         <div className="image-info">
-          <h2>{image.title}</h2>
-          <p>Artist: {image.artist}</p>
-          <p>Year: {image.year}</p>
+          <h2>{art.title}</h2>
+          <p>Artist: {art.artist}</p>
+          <p>Year: {art.year}</p>
         </div>
-        <button className="close-button" onClick={onClose}>Close</button>
+        <button className="close-button" onClick={onClose}>X</button>
       </div>
     </div>
   );
