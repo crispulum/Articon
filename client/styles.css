@@ -57,6 +57,22 @@ body {
     font-size: 1rem;
 }
 
+.search-btn-home {
+    width: 8rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    padding: 3px;
+    border: 1px solid #797663;
+    border-radius: .5rem; 
+    color: #5e5b4b;
+}
+
+.home-btn-container {
+    width: 18rem;
+    display: flex;
+    justify-content: space-between;
+}
+
 .signup-btn-home, .login-btn-home {
     width: 8rem;
     font-size: 1.3rem;
