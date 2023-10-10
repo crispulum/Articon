@@ -5,6 +5,20 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 const app = express();
+
+
+
+
+
+//third party modules
+
+
+
+//custom packages
+const artApiRouter = require('./routes/artApi')
+//e.g. we import our routes here
+
+
 const dotenv = require('dotenv').config();
 
 const PORT = 3000;
@@ -38,6 +52,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
+
+app.use('/art', artApiRouter)
 
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 
