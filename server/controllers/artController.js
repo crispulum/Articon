@@ -131,7 +131,8 @@ const artController = {
 
             })
             console.log(newPendingArt)
-            await newPendingArt.save()
+            const newSavedArt = await newPendingArt.save()
+            response.locals.finalArt = newSavedArt;
             return next()
         } catch (error) {
             console.log('error in saveNewArt: ' + error)
