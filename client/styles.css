@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Montserrat&family=Mooli&family=Oswald&display=swap');
+/* fonts so far, all from fonts.google.com:  
+font-family: 'Cabin', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Mooli', sans-serif;
+font-family: 'Oswald', sans-serif;
+
+*/
+
+/* 
+https://d1ee3oaj5b5ueh.cloudfront.net/thumbs/635xAUTO_original_article_2020_11_5fb7c1d000644.jpeg
+
+    https://i.pinimg.com/originals/d7/2f/1d/d72f1d8a1b8fe62aa5e8ddaaa0a47867.jpg
+
+    https://i.pinimg.com/736x/62/29/5c/62295c498f626fa8a32563eff3b75547.jpg
+
+    https://i.icanvas.com/JSR25?d=3&sh=v&s=s&p=1&bg=w&t=1665537995
+*/
+
 body {
     margin: 0;
     padding: 0;
@@ -31,10 +50,183 @@ body {
 
 .main-container input {
     height: 2.5rem;
-    width: 25rem;
+    width: 28rem;
     text-align: center;
     border-radius: 0.5rem;
     border: solid black 0.1rem;
     font-size: 1rem;
 }
+
+.signup-btn-home, .login-btn-home {
+    width: 8rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    padding: 3px;
+    background-color: #797663;
+    color: white;
+    border: 1px solid white;
+    border-radius: .5rem; 
+}
+
+.signup-btn-home:hover, .login-btn-home:hover {
+    background-color: #5c5a4c;
+}
+
+/* .login {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    
+}
+
+.login-content-container {
+    height: 100vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #444654;
+    background-color: #67655a;
+    background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85)
+}
+
+.image-container {
+    height: 100vh;
+    width: 60vw;
+} */
+
+.login, .signup {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("https://images.unsplash.com/photo-1569533816166-49d08c516a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
+    background-size: 100% 100%;
+    /* background: radial-gradient(#9b998c,#8e8d80, #6d6b61, #67655a) */
+    /* background-image: url("https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg");
+    background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; */
+    
+}
+
+
+.articon-logo {
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 8rem;
+}
+
+.login-form, .signup-form {
+    background-color: rgba(255, 255, 255, 0.739);
+    border: 1px solid black;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-form {
+    height: 25rem;
+    width: 35rem;
+}
+
+.login-username-label, .login-password-label {
+    font-size: 2.2rem;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.2rem;
+}
+
+.login-username-input, .login-password-input {
+    font-size: 1.3rem;
+}
+
+.login-username-input {
+    margin-bottom: 1.2rem;
+}
+
+.login-password-input {
+    margin-bottom: 1.4rem;
+}
+
+.login-btns-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3.5rem;
+}
+
+.signup-btn, .login-btn {
+    font-size: 1.3rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 3px;
+    padding-bottom: 4px;
+    
+}
+
+.signup-btn {
+    color: #726f5e;
+    background: none;
+    border: 0.01rem solid #918d77;
+}
+
+.signup-btn:hover {
+    background-color: #918d77;
+    color: white;
+}
+
+.login-btn {
+    background-color: #797663;
+    color: white;
+    border: none;
+}
+
+.login-btn:hover {
+    background-color: #5c5a4c;
+}
+
+
+
+.signup-form {
+    height: 25rem;
+    width: 35rem;
+}
+
+.signup-username-label, .signup-username-input, .signup-password-label, .signup-password-input, .signup-reenter-password-label, .signup-reenter-password-input {
+    margin-bottom: 1.1rem;
+}
+
+.signup-username-label, .signup-password-label,.signup-reenter-password-label {
+    font-size: 2rem;
+}
+
+.signup-username-input, .signup-password-input, .signup-reenter-password-input{
+    font-size: 1.3rem;
+}
+
+.signup-page-btn {
+    font-size: 1.3rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 4px;
+    padding-bottom: 5px;
+    color: white;
+    background-color: #918d77;
+    border: none;
+}
+
+.signup-page-btn:hover {
+    background-color: #7f7b66;
+    color: white;
+}
+
+
 
