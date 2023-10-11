@@ -14,5 +14,9 @@ router.post('/submitArt',
     artController.saveNewArt,
     (req, res) => res.status(200).json(res.locals.finalArt))
 
+router.post('/validateAndSave',
+    artController.validateAndSave,
+    (req, res) => res.status(200).json(res.locals.savedArt))
+
 
 module.exports = router;
