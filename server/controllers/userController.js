@@ -2,14 +2,8 @@ const { User } = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 const userController = {
-  // 200 -  ok
-  // 201 - created
-  // 404 - not found
-  // 500 - internal server error
-
-  // get all db users
+  // get all users
   // GET
-
   async getAllUsers(req, res, next) {
     try {
       const users = await User.find({});
@@ -18,7 +12,7 @@ const userController = {
       next({
         log: `getAllUsers: ERROR: ${err}`,
         message: {
-          err: 'We cannot get all the users',
+          err: 'We cannot get users',
         },
         status: 500,
       });
@@ -46,7 +40,7 @@ const userController = {
   },
 
   // get a user
-  // POST
+  // GET
 
   async getUser(req, res, next) {
     const { userId } = req.params;
@@ -114,7 +108,7 @@ const userController = {
       next({
         log: `deleteUser: ERROR: ${err}`,
         message: {
-          err: 'We could not delete used',
+          err: 'We could not delete the user',
         },
         status: 500,
       });
@@ -122,10 +116,4 @@ const userController = {
   },
 };
 
-module.exports = {
-  getAllUsers,
-  createUser,
-  getUser,
-  updateUser,
-  deleteUser,
-};
+module.exports = userController;
