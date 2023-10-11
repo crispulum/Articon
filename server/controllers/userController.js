@@ -1,5 +1,7 @@
 const { User } = require('../models/userModel');
 const bcrypt = require('bcryptjs');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 const userController = {
   // get all users
@@ -62,6 +64,45 @@ const userController = {
     }
   },
 
+  // verify user
+  //
+
+  async verifyUser(req, res, next) {
+    const { username, password } = req.body;
+     try {
+      if (!username.length || !password.length) {
+        console.log(
+          'Please include a username and a password in userController.verifyUser'
+        );
+      }
+
+      const user = await User.findOne({ username });
+      if (!user) {
+        console.log('Login unsuccessful, please signup');
+        return res
+          .status(200)
+          .json({ userNotFound: 'User was not found in the database' });
+      }
+
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+      if (!isPasswordCorrect) {
+        console.log('Login unsuccessful, please signup');
+        return res.status(200).json({
+          passwordIncorrect:
+            'The entered password was incorrect. Please try again.',
+        });
+
+    } catch (err) {
+      next({
+        log: `verifyUser: ERROR: ${err}`,
+        message: {
+          err: 'We could not verify the user',
+        },
+        status: 500,
+      });
+    }
+  },
+
   // update a user
   // PUT
 
@@ -113,7 +154,8 @@ const userController = {
         status: 500,
       });
     }
-  },
-};
-
+  }
+  
+}
+}
 module.exports = userController;
