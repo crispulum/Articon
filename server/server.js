@@ -6,18 +6,10 @@ const path = require('path');
 const { MongoClient } = require('mongodb');
 const app = express();
 
+//import routes
 
-
-
-
-//third party modules
-
-
-
-//custom packages
-const artApiRouter = require('./routes/artApi')
-//e.g. we import our routes here
-
+const artApiRouter = require('./routes/artApi');
+const userRouter = require('./routes/userRoute');
 
 const dotenv = require('dotenv').config();
 
@@ -48,12 +40,14 @@ db.on('disconnected', () => {
 });
 
 //Handle static assets, handle JSONS, encoded URLS
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-app.use('/art', artApiRouter)
+app.use('/art', artApiRouter);
+app.use('/api/users', userRouter);
 
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 
