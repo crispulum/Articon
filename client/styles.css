@@ -101,22 +101,6 @@ body {
     height: 100vh;
     width: 60vw;
 }
-/* .login,  */
-/* .signup {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: url("https://images.unsplash.com/photo-1569533816166-49d08c516a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
-    background-size: 100% 100%; */
-    /* background: radial-gradient(#9b998c,#8e8d80, #6d6b61, #67655a) */
-    /* background-image: url("https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg");
-    background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; */
-    
-/* } */
 
 
 .articon-logo {
