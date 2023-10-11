@@ -7,6 +7,14 @@ const Home = () => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
 
+    const signupOnClick = (e) => {
+        e.preventDefault();
+        navigate("/signup")
+    }
+    const loginOnClick = (e) => {
+        e.preventDefault();
+        navigate("/login")
+    }
     const handleSearch = () => {
         if (searchValue === 'test') {
           navigate('/main');
@@ -29,7 +37,11 @@ const Home = () => {
           value={searchValue}
           onChange={handleInputChange}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className="search-btn-home" onClick={handleSearch}>Search</button>
+        <div className="home-btn-container">
+            <button className="login-btn-home" onClick={loginOnClick}>Login</button>
+            <button className="signup-btn-home" onClick={signupOnClick}>Sign-Up</button> 
+        </div>
       </div>
     </div>
   );
