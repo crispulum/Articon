@@ -13,7 +13,7 @@ const artSchema = new mongoose.Schema({
     },
     year: {
         type: String,
-        default: 2023,
+        default: 'unknown',
     },
     medium: {
         type: String,
@@ -21,11 +21,11 @@ const artSchema = new mongoose.Schema({
     },
     url: {
         type: String,
-        required: true,
+        default: 'Unknown'
     },
     thumbnailURL: {
         type: String,
-        required: true
+        default: 'Unknown'
     },
     score: {
         type: Number,
