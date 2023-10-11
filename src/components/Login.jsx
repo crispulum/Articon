@@ -28,39 +28,48 @@ const Login = () => {
 
     return (
         <div className='login'>
-            <div className="articon-logo">
-                <p>Login</p>
-            </div>
-            <form action="" className="login-form">
-                <label htmlFor="username" className='login-username-label'>
-                    Username
-                </label>
-                <input 
-                    type="text" 
-                    className="login-username-input" 
-                    placeholder='Username'
-                    name='username'
-                    value={formData.username}
-                    onChange={handleChange}
-                />
-                <label htmlFor="password" className='login-password-label'>
-                    Password
-                </label>
-                <input 
-                    type="text" 
-                    className="login-password-input" 
-                    placeholder='Password'
-                    name='password'
-                    value={formData.password}
-                    onChange={handleChange}
-                />
-                <div className="login-btns-container">
-                    <button type="submit" className="signup-btn" onClick={signupOnClick}>Sign-up</button>
-                    <button type="submit" className="login-btn">Login</button> 
+            <div className="login-signup-content-container">
+                <div className="articon-logo">
+                    <p>Login</p>
                 </div>
-            </form> 
+                <form action="" className="login-form">
+                    <label htmlFor="username" className='login-username-label'>
+                        Username
+                    </label>
+                    <input 
+                        type="text" 
+                        className="login-username-input" 
+                        placeholder='Username'
+                        name='username'
+                        value={formData.username}
+                        onChange={handleChange}
+                    />
+                    <label htmlFor="password" className='login-password-label'>
+                        Password
+                    </label>
+                    <input 
+                        type="text" 
+                        className="login-password-input" 
+                        placeholder='Password'
+                        name='password'
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                    <div className="login-btns-container">
+                        <button type="submit" className="signup-btn" onClick={signupOnClick}>Sign-up</button>
+                        <button type="submit" className="login-btn">Login</button> 
+                    </div>
+                </form> 
+            </div>
+            <img 
+                src={imageLink} 
+                alt="" 
+                className='image-container'
+            />
         </div>
     )
+
+
     // return (
     //     <div className='login'>
              

@@ -7,15 +7,6 @@ font-family: 'Oswald', sans-serif;
 
 */
 
-/* 
-https://d1ee3oaj5b5ueh.cloudfront.net/thumbs/635xAUTO_original_article_2020_11_5fb7c1d000644.jpeg
-
-    https://i.pinimg.com/originals/d7/2f/1d/d72f1d8a1b8fe62aa5e8ddaaa0a47867.jpg
-
-    https://i.pinimg.com/736x/62/29/5c/62295c498f626fa8a32563eff3b75547.jpg
-
-    https://i.icanvas.com/JSR25?d=3&sh=v&s=s&p=1&bg=w&t=1665537995
-*/
 
 body {
     margin: 0;
@@ -87,7 +78,7 @@ body {
     background-color: #5c5a4c;
 }
 
-/* .login {
+.login, .signup {
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -95,7 +86,7 @@ body {
     
 }
 
-.login-content-container {
+.login-signup-content-container {
     height: 100vh;
     width: 40vw;
     display: flex;
@@ -109,23 +100,23 @@ body {
 .image-container {
     height: 100vh;
     width: 60vw;
-} */
-
-.login, .signup {
+}
+/* .login,  */
+/* .signup {
     height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-image: url("https://images.unsplash.com/photo-1569533816166-49d08c516a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
-    background-size: 100% 100%;
+    background-size: 100% 100%; */
     /* background: radial-gradient(#9b998c,#8e8d80, #6d6b61, #67655a) */
     /* background-image: url("https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg");
     background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; */
     
-}
+/* } */
 
 
 .articon-logo {

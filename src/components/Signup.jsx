@@ -3,6 +3,9 @@ import {useNavigate} from 'react-router-dom';
 
 
 const Signup = () => {
+    const imageLink = "https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg"
+
+    
     const [formData, setFormData] = useState({
         username: "",
         password: "",
@@ -19,6 +22,7 @@ const Signup = () => {
     
     return (
         <div className='signup'>
+            <div className="login-signup-content-container">
             <div className="articon-logo">
                 <p>Sign-Up</p>
             </div>
@@ -58,6 +62,12 @@ const Signup = () => {
                 />
                 <button className="signup-page-btn">Sign-up</button>
             </form>
+            </div>
+            <img 
+                src={imageLink} 
+                alt="" 
+                className='image-container'
+            />
         </div>
     )
 }
