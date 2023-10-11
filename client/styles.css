@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Montserrat&family=Mooli&family=Oswald&display=swap');
+/* fonts so far, all from fonts.google.com:  
+font-family: 'Cabin', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Mooli', sans-serif;
+font-family: 'Oswald', sans-serif;
+
+*/
+
+
 body {
     margin: 0;
     padding: 0;
@@ -8,7 +18,6 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-image: url("https://images.unsplash.com/photo-1569533816166-49d08c516a77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80");
     background-size: 100% 100%;
 }
@@ -18,7 +27,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 15rem;
+    margin-top: 10rem;
     text-align: center;
 }
 
@@ -31,10 +40,273 @@ body {
 
 .main-container input {
     height: 2.5rem;
-    width: 25rem;
+    width: 28rem;
     text-align: center;
     border-radius: 0.5rem;
     border: solid black 0.1rem;
     font-size: 1rem;
 }
 
+.search-btn-home {
+    width: 8rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    padding: 3px;
+    border: 1px solid #797663;
+    border-radius: .5rem; 
+    color: #5e5b4b;
+}
+
+.home-btn-container {
+    width: 18rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-btn-home, .login-btn-home {
+    width: 8rem;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    padding: 3px;
+    background-color: #797663;
+    color: white;
+    border: 1px solid white;
+    border-radius: .5rem; 
+}
+
+.signup-btn-home:hover, .login-btn-home:hover {
+    background-color: #5c5a4c;
+}
+
+.login, .signup {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    
+}
+
+.login-signup-content-container {
+    height: 100vh;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #444654;
+    background-color: #67655a;
+    background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85)
+}
+
+.image-container {
+    height: 100vh;
+    width: 60vw;
+}
+
+
+.articon-logo {
+    color: white;
+    text-shadow: 3px 3px black;
+    font-size: 8rem;
+}
+
+.login-form, .signup-form {
+    background-color: rgba(255, 255, 255, 0.739);
+    border: 1px solid black;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.login-form {
+    height: 25rem;
+    width: 35rem;
+}
+
+.login-username-label, .login-password-label {
+    font-size: 2.2rem;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 1.2rem;
+}
+
+.login-username-input, .login-password-input {
+    font-size: 1.3rem;
+}
+
+.login-username-input {
+    margin-bottom: 1.2rem;
+}
+
+.login-password-input {
+    margin-bottom: 1.4rem;
+}
+
+.login-btns-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 3.5rem;
+}
+
+.signup-btn, .login-btn {
+    font-size: 1.3rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 3px;
+    padding-bottom: 4px;
+    
+}
+
+.signup-btn {
+    color: #726f5e;
+    background: none;
+    border: 0.01rem solid #918d77;
+}
+
+.signup-btn:hover {
+    background-color: #918d77;
+    color: white;
+}
+
+.login-btn {
+    background-color: #797663;
+    color: white;
+    border: none;
+}
+
+.login-btn:hover {
+    background-color: #5c5a4c;
+}
+
+
+
+.signup-form {
+    height: 25rem;
+    width: 35rem;
+}
+
+.signup-username-label, .signup-username-input, .signup-password-label, .signup-password-input, .signup-reenter-password-label, .signup-reenter-password-input {
+    margin-bottom: 1.1rem;
+}
+
+.signup-username-label, .signup-password-label,.signup-reenter-password-label {
+    font-size: 2rem;
+}
+
+.signup-username-input, .signup-password-input, .signup-reenter-password-input{
+    font-size: 1.3rem;
+}
+
+.signup-page-btn {
+    font-size: 1.3rem;
+    width: 8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding: 4px;
+    padding-bottom: 5px;
+    color: white;
+    background-color: #918d77;
+    border: none;
+}
+
+.signup-page-btn:hover {
+    background-color: #7f7b66;
+    color: white;
+}
+
+/* ----- Git merge fix starts here ----- */
+
+
+.image-gallery {
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    padding: 5px;
+  }
+  
+.thumbnail {
+    border: 1px solid black;
+  box-sizing: border-box; 
+  margin: 5px;
+  flex: 0 0 calc(33.33% - 10px); 
+  max-width: calc(33.33% - 10px); 
+  text-align: center; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* Stack image and title vertically */
+  justify-content: center; /* Vertically center contents */
+  align-items: center; /* Horizontally center contents */
+}
+
+.thumbnail img {
+  max-width: 100%;
+  max-height: 100%; 
+}
+
+.thumbnail h3 {
+  margin: 5px 0;
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(0, 0, 0, 0.7); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  
+  .lightbox .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent black */
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .lightbox .lightbox-content {
+    position: relative;
+    border: 3px solid black;
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 20px; /* Add padding to create space around content */
+    max-width: 80%; /* Limit the content width to 80% of the viewport width */
+    max-height: 80%; /* Limit the content height to 80% of the viewport height */
+    overflow: auto; /* Add this line for scrollable content */
+  }
+  
+  .lightbox img {
+    max-width: 100%;
+    max-height: 80%; /* Adjust this as needed */
+  }
+  
+  
+
+  .lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+  }
+  
+  .add-art-component {
+    border: 1px solid black
+  }
+
+  .search-form {
+    border: 1px solid black
+  }
