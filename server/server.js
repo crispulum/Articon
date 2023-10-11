@@ -45,13 +45,7 @@ db.on('disconnected', () => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(
-  session({
-    secret: 'ooooooh-secret-keeeeeeey',
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 

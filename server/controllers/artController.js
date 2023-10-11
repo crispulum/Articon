@@ -11,16 +11,16 @@ const artController = {
     //this one queries wikipedia. it fills out what it can.
     async queryArt(request, response, next) {
         try {
-            const queryString = request.body.queryString;
+            const queryString = request.body.title + ' ' + request.body.artist;
 
             if (!queryString) {
                 return next({ error: 'queryString is required.' })
             }
             const pageName = await (findPageTitle(queryString));
             if (pageName) {
-            const prelimArtObj = await parsePageHTML(pageName);
-            // this grabs info off the wikipedia page's infobox.
-            response.locals.artObj = prelimArtObj;
+                const prelimArtObj = await parsePageHTML(pageName);
+                // this grabs info off the wikipedia page's infobox.
+                response.locals.artObj = prelimArtObj;
             }
             return next();
         } catch (error) {
@@ -35,7 +35,8 @@ const artController = {
         try {
             //here, we query wikimedia to try to get a higher resolution image, as well as any information not in the wikipedia infobox.
             const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
-            const searchQueryQ = request.body.queryString;
+            const preSearchQuery = request.body.title + ' ' + request.body.artist;
+            const searchQueryQ = preSearchQuery;
             const searchQuery = searchQueryQ.replace(/ /g, '_');
             const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
 
@@ -144,8 +145,6 @@ const artController = {
                     });
                     response.locals.artObj.Artist = request.body.artist;
                     response.locals.artObj.title = request.body.title;
-                    // const titleContainer = summaryBox.find('#fileinfotpl_art_title').next();
-                    // console.log(titleContainer.contents().text().trim())
                 }
             }
             else {
