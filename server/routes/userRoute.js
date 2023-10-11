@@ -12,6 +12,9 @@ router.post('/', userController.createUser);
 // get a user
 router.get('/:userId', userController.getUser);
 
+// verify a user
+router.post('/login', userController.verifyUser);
+
 // update a user
 router.put('/:userId', userController.updateUser);
 

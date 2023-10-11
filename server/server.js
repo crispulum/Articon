@@ -1,6 +1,7 @@
 //core node packages
 const express = require('express');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const { MongoClient } = require('mongodb');
@@ -43,6 +44,14 @@ db.on('disconnected', () => {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(
+  session({
+    secret: 'ooooooh-secret-keeeeeeey',
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
