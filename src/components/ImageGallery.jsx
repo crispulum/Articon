@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Thumbnail from './Thumbnail';
 import Lightbox from './Lightbox';
 import AddArtComponent from './AddArtComponent';
+import SearchForm from './SearchForm';
 
 
 /*
@@ -66,8 +67,9 @@ const artArray = [
 ];
 
 function ImageGallery() {
-    const [pictureData, setPictureData] = useState(null)
+    const [pictureData, setPictureData] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [showSearchForm, setShowSearchForm] = useState(false);
 
     const handleImageClick = (image) => {
       setSelectedImage(image);
@@ -76,17 +78,39 @@ function ImageGallery() {
     const handleCloseLightbox = () => {
       setSelectedImage(null);
     };
+
+    const handleAddArtClick = () => {
+      setShowSearchForm(true);
+    };
+
+    const handleFormSubmit = (formData) => {
+        // Handle the form submission logic here
+        // You can make an API request with the formData
+        console.log('Form data submitted:', formData);
+      };
+  
+    const handleCloseSearchForm = () => {
+      setShowSearchForm(false);
+    };
   
     return (
       <div className="image-gallery">
         {artArray.map((art, index) => (
-          <Thumbnail
-            key={index}
-            art={art}
-            onClick={() => handleImageClick(art)}
-          />
+          <Thumbnail key={index} art={art} onClick={() => handleImageClick(art)} />
         ))}
-        <AddArtComponent/>
+        <button className="add-art-button" onClick={handleAddArtClick}>
+          Add Art
+        </button>
+        {showSearchForm && (
+        <div className="lightbox">
+          <div className="lightbox-content">
+            <button className="close-button" onClick={handleCloseSearchForm}>
+              X
+            </button>
+            <SearchForm onSubmit={handleFormSubmit} onClose={handleCloseSearchForm} />
+          </div>
+        </div>
+      )}
         {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseLightbox} />}
       </div>
     );

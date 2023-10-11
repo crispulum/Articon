@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, onClose }) {
   const [formData, setFormData] = useState({
     artist: '',
     title: '',
@@ -17,6 +17,8 @@ function SearchForm({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(formData);
+
+    onClose()
   };
 
   return (
@@ -29,6 +31,7 @@ function SearchForm({ onSubmit }) {
             id="artist"
             name="artist"
             value={formData.artist}
+            required
             onChange={handleInputChange}
           />
         </div>
@@ -39,6 +42,7 @@ function SearchForm({ onSubmit }) {
             id="title"
             name="title"
             value={formData.title}
+            required
             onChange={handleInputChange}
           />
         </div>
