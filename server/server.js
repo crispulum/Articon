@@ -57,14 +57,17 @@ app.use('/art', artApiRouter)
 
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 
+
+
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
-    message: { err: 'An error occurred' },
+    message: { err: err},
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
+  console.log(err)
   return res.status(errorObj.status).json(errorObj.message);
 });
 app.listen(PORT, () => {
