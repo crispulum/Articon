@@ -12,17 +12,22 @@ const Login = () => {
     
     const loginOnClick = (e) => {
         e.preventDefault();
-        const url = "/api/users/login:" + formData.username
+        const url = "/api/users/login"
         fetch(url, {
             method: 'POST',
-            body: {
-                username: formData.username,
-                password: formData.password
+            body: JSON.stringify({
+                "username": String(formData.username),
+                "password": String(formData.password)
+            }),
+            headers: {
+                'Content-Type': "application/json"
             }
-        });
-        
-
-
+        })
+        // .then(data => data.json())
+        .then(data => {
+            console.log(data);
+            navigate('/');
+        })
     }
     const signupOnClick = (e) => {
         e.preventDefault();
@@ -68,7 +73,7 @@ const Login = () => {
                     />
                     <div className="login-btns-container">
                         <button type="submit" className="signup-btn" onClick={signupOnClick}>Sign-up</button>
-                        <button type="submit" className="login-btn">Login</button> 
+                        <button type="submit" className="login-btn" onClick={loginOnClick}>Login</button> 
                     </div>
                 </form> 
             </div>

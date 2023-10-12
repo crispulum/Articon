@@ -18,20 +18,23 @@ const Signup = () => {
             console.log('Password and Re-Entered password does not match');
             return;
         }
-        const url = "localhost:8080/api/users";
+        console.log(formData.username)
+
+        const url = "/api/users/";
         fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json"
             },
-            body: {
-                username: formData.username,
-                password: formData.password
-            }
+            body: JSON.stringify({
+                "username": "tester8",
+                "password": "test"
+            })
         })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then(data => {
             console.log('User created!');
+            console.log(data);
             navigate('/login');
         })
     }
