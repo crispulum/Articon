@@ -110,7 +110,7 @@ const userController = {
       });
     }
   },
-//verify a user's JWT Token
+  //verify a user's JWT Token
   async verifyToken(req, res, next) {
     try {
       const token = req.cookies.token;
@@ -121,13 +121,22 @@ const userController = {
       }
       jwt.verify(token, 'spooky-key', (err, user) => {
         if (err) {
+          console.log('thou shalt not')
           return res.status(403).json({ message: 'Forbidden' });
         }
-        console.log('access granted')
-        return next()
+        else {
+          console.log('access granted')
+          return next()
+        }
       })
     } catch (error) {
-      
+      next({
+        log: `verifyUser: ERROR: ${err}`,
+        message: {
+          err: 'User Token invalid',
+        },
+        status: 303,
+      });
     }
   },
 
