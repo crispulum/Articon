@@ -69,7 +69,7 @@ const userController = {
 
   async verifyUser(req, res, next) {
     const { username, password } = req.body;
-     try {
+    try {
       if (!username.length || !password.length) {
         console.log(
           'Please include a username and a password in userController.verifyUser'
@@ -91,7 +91,10 @@ const userController = {
           passwordIncorrect:
             'The entered password was incorrect. Please try again.',
         });
-
+      }
+      else {
+        console.log('logged in boo')
+      }
     } catch (err) {
       next({
         log: `verifyUser: ERROR: ${err}`,
@@ -155,7 +158,7 @@ const userController = {
       });
     }
   }
-  
+
 }
-}
+
 module.exports = userController;

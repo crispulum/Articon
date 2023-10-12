@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
-function SearchForm({ onSubmit, onClose }) {
+function SearchForm({ onSubmit, onClose, onAddArt }) {
   const [formData, setFormData] = useState({
     artist: '',
     title: '',
+    emotion: ''
   });
 
   const handleInputChange = (event) => {
@@ -14,27 +15,19 @@ function SearchForm({ onSubmit, onClose }) {
     });
   };
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit(formData);
-
-    onClose()
+    onSubmit(formData); 
+  
+    onClose(); 
   };
+  
 
   return (
     <div className='search-form'>
+      <p>What piece of art were you looking for?</p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="artist">Artist:</label>
-          <input
-            type="text"
-            id="artist"
-            name="artist"
-            value={formData.artist}
-            required
-            onChange={handleInputChange}
-          />
-        </div>
         <div>
           <label htmlFor="title">Artwork Title:</label>
           <input
@@ -42,6 +35,17 @@ function SearchForm({ onSubmit, onClose }) {
             id="title"
             name="title"
             value={formData.title}
+            required
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="artist">Artist:</label>
+          <input
+            type="text"
+            id="artist"
+            name="artist"
+            value={formData.artist}
             required
             onChange={handleInputChange}
           />

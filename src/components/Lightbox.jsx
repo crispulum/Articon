@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 function Lightbox({ art, onClose }) {
   const [copied, setCopied] = useState(false);
+  const [score, setScore] = useState(art.score);
 
   const handleCopyToClipboard = () => {
     const urlToCopy = art.url;
@@ -24,6 +25,34 @@ function Lightbox({ art, onClose }) {
     setCopied(true);
   };
 
+  const handleVote = (voteType) => {
+    const voteData = {
+      id: art._id,
+      score: voteType
+    };
+
+    fetch('/art/vote', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(voteData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          response.json()
+            .then((data) => {
+              setScore(data.score); // Update the score from the response
+            });
+        } else {
+          console.error('Vote request failed:', response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error('Error sending vote request:', error);
+      });
+  };
+
   return (
     <div className="lightbox">
       <div className="lightbox-content">
@@ -35,6 +64,11 @@ function Lightbox({ art, onClose }) {
         <p>{art.artist}</p>
         <p>{art.year}</p>
         <p>{art.medium}</p>
+        <p>Score: {score}</p>
+        <p>Submitted by: {art.submitted_by}</p>
+
+        <button onClick={() => handleVote(1)}>↑</button>
+        <button onClick={() => handleVote(-1)}>↓</button>
 
         <button onClick={handleCopyToClipboard}>
           {copied ? 'Copied!' : 'Copy to Clipboard'}

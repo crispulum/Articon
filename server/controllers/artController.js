@@ -1,24 +1,27 @@
 const cheerio = require('cheerio');
 const Art = require('../models/artModel');
+const puppeteer = require('puppeteer')
 //in a general sense, i'm sorry if you have to read this. a lot of these queries are annoying webscraping that makes no sense without the context of how the pages I'm scraping are structured.
 //you can sort of just assume it works, as it mostly does. if you have a better idea than scraping wikipedia for this information, I would LOVE to hear it.
 const artController = {
 
 
-    
-    //im very sorry about this, I tried my best to make it readable :)
 
+    //im very sorry about this, I tried my best to make it readable :)
+    //this one queries wikipedia. it fills out what it can.
     async queryArt(request, response, next) {
         try {
-            const queryString = request.body.queryString;
+            const queryString = request.body.title + ' ' + request.body.artist;
 
             if (!queryString) {
                 return next({ error: 'queryString is required.' })
             }
             const pageName = await (findPageTitle(queryString));
-            const prelimArtObj = await parsePageHTML(pageName);
-            // this grabs info off the wikipedia page's infobox.
-            response.locals.artObj = prelimArtObj;
+            if (pageName) {
+                const prelimArtObj = await parsePageHTML(pageName);
+                // this grabs info off the wikipedia page's infobox.
+                response.locals.artObj = prelimArtObj;
+            }
             return next();
         } catch (error) {
             console.log('error in trueQueryArt: ' + error)
@@ -27,21 +30,29 @@ const artController = {
 
     },
 
+
     async getBigImage(request, response, next) {
         try {
             //here, we query wikimedia to try to get a higher resolution image, as well as any information not in the wikipedia infobox.
             const commonsApiUrl = 'https://commons.wikimedia.org/w/api.php';
-            const searchQueryQ = request.body.queryString;
+            const preSearchQuery = request.body.title + ' ' + request.body.artist;
+            const searchQueryQ = preSearchQuery;
             const searchQuery = searchQueryQ.replace(/ /g, '_');
             const searchUrl = `${commonsApiUrl}?action=query&format=json&list=search&srsearch=${searchQuery}&srnamespace=6`;
 
             const searchResponse = await fetch(searchUrl);
             const searchData = await searchResponse.json();
+            // console.log(searchData.query.search[0])
+            // console.log(' is SDQST')
+            if (searchData.query.search[0] == undefined) {
+                response.locals.error = "Error - wikimedia article not found"
 
-
+                return next(response.locals.error)
+            }
             if (searchData.query && searchData.query.search && searchData.query.search.length > 0) {
                 const firstResult = searchData.query.search[0];
                 const imageTitle = firstResult.title;
+                //console.log(firstResult)
 
                 //link to the page - if we ever have to figure out getting slightly smaller images there are some hosted here.
                 //if you're not me and working on this, have fun!
@@ -62,9 +73,19 @@ const artController = {
                     }
 
                     const $ = cheerio.load(parsedBonusText);
+                    const preview = $('.fullImageLink')
+                    if (preview.length > 0) {
+                        const imageSrc = preview.find('img').attr('src');
+
+                        if (imageSrc) {
+                            response.locals.artObj.thumbnailUrl = imageSrc;
+                        }
+                    }
+
                     const summaryBox = $('.fileinfotpl-type-artwork');
-                    //console.log("summary box: ")
-                    //console.log(summaryBox.children())
+
+                    if (summaryBox.length == 0) console.log('zero')
+
                     if (!response.locals.artObj.hasOwnProperty('Year')) {
                         const dateContainer = summaryBox.find('#fileinfotpl_date');
                         if (dateContainer.length > 0) {
@@ -88,15 +109,42 @@ const artController = {
                             });
                         }
                     }
+
+                    //so to explain some of this drama, essentially, SOME wikimedia summary boxes are loaded in scripts once the page is loaded. I can't access these via Cheerio - I'd need something like Puppeteer to parse them.
+                    //unfortunately, WSL does not play nice with Puppeteer because of how it looks for a Chrome installation, I think. 
+                    //so instead I'm calling it a day and having the user manually validate some of the data. sue me.
+
+                    //}
                     if (!response.locals.artObj.hasOwnProperty('Medium')) {
                         const mediumContainer = summaryBox.find('#fileinfotpl_art_medium').next();
                         response.locals.artObj.Medium = mediumContainer.contents().text().trim();
+                        console.log(mediumContainer.contents().text().trim())
                     }
-                    if (!response.locals.artObj.hasOwnProperty('Artist')) {
-                        const artistContainer = summaryBox.find('#creator');
-                        //may or may not work in all cases. it's fairly rare that this comes up, though. 
-                        response.locals.artObj.Artist = artistContainer.children().first().text().trim();
-                    }
+                    // if (!response.locals.artObj.hasOwnProperty('Artist')) {
+                    //     const artistContainer = summaryBox.find('#fileinfotpl_aut, #creator');
+                    //     //may or may not work in all cases. it's fairly rare that this comes up, though. 
+                    //     console.log(artistContainer.find('.fn').text().trim())
+                    //     response.locals.artObj.Artist = artistContainer.children().first().text().trim();
+                    //     console.log('wah!')
+
+                    // }
+
+
+
+                    let mediumText = ''
+                    summaryBox.find('.fileinfo-paramfield:contains("Medium")').each((index, element) => {
+                        // Exclude content in invisible divs
+                        //console.log(index, " is index")
+                        const mediumValue = $(element)
+                            .next() // Get the next sibling element (the medium value)
+                            .text()
+                            .trim(); // Trim any leading/trailing whitespace
+                        mediumText = mediumValue;
+                        console.log(mediumText, " is mediumText2")
+                        response.locals.artObj.Medium = mediumText;
+                    });
+                    response.locals.artObj.Artist = request.body.artist;
+                    response.locals.artObj.title = request.body.title;
                 }
             }
             else {
@@ -116,7 +164,7 @@ const artController = {
         try {
             console.log(response.locals.artObj)
 
-            const newPendingArt = new Art({
+            const newPendingArt = {
 
                 title: response.locals.artObj.title,
                 artist: response.locals.artObj.Artist,
@@ -129,10 +177,11 @@ const artController = {
 
 
 
-            })
-            console.log(newPendingArt)
-            const newSavedArt = await newPendingArt.save()
-            response.locals.finalArt = newSavedArt;
+            }
+            // console.log(newPendingArt)
+            //const newSavedArt = await newPendingArt.save()
+            //response.locals.finalArt = newSavedArt;
+            response.locals.finalArt = newPendingArt;
             return next()
         } catch (error) {
             console.log('error in saveNewArt: ' + error)
@@ -141,9 +190,25 @@ const artController = {
 
     },
 
+    async validateAndSave(request, response, next) {
+
+        try {
+            const validatedArt = request.body.validatedArtObject;
+            const newArtDocument = new Art({
+                ...validatedArt
+            })
+            response.locals.savedArt = await newArtDocument.save();
+            return next();
+        }
+        catch (error) {
+            console.log('error in validateAndSave: ' + error)
+            return next(error);
+        }
+    },
+
     async findArt(request, response, next) {
         try {
-            const queriedEmotion = request.body.emotion;
+            const queriedEmotion = request.params.emotion;            
             const returnedArt = await Art.find({ emotion: queriedEmotion })
             response.locals.foundArt = returnedArt;
             return next()
@@ -201,7 +266,7 @@ async function parsePageHTML(pageName) {
     }
     catch (error) {
         console.error('error in parsePageHTML ' + error);
-       // return next(error)
+        // return next(error)
     }
 }
 
@@ -230,11 +295,11 @@ async function findPageTitle(query) {
         }
 
         const data = await response.json();
-
+        if (!data.pages[0]) return null;
         return data.pages[0].title;
     } catch (error) {
         console.error('error in findPageTitle ' + error);
-       // return next(error)
+        // return next(error)
     }
 }
 

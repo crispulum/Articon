@@ -1,75 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Thumbnail from './Thumbnail';
 import Lightbox from './Lightbox';
 import AddArtComponent from './AddArtComponent';
 import SearchForm from './SearchForm';
+import ArtVerification from './ArtVerification';
 
-
-/*
-Image Gallery component needs in an array of objects structured as follows:
-[
-    {
-        title: 'The Birth of Venus',
-        artist: 'Sandro Botticelli',
-        year: 1486,
-        medium: 'tempera on canvas',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/The_Birth_of_Venus_%28Botticelli%29_1.jpg',
-        score: 4,
-        emotion: 'Happy',
-        submitted_by: 'Binette',
-    }
-]
-
-*/
-
-const artArray = [
-    {
-        title: 'The Birth of Venus',
-        artist: 'Sandro Botticelli',
-        year: 1486,
-        medium: 'tempera on canvas',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/The_Birth_of_Venus_%28Botticelli%29_1.jpg',
-        score: 4,
-        emotion: 'Happy',
-        submitted_by: 'Binette',
-    },
-    {
-        title: 'The Son of Man',
-        artist: 'René Magritte',
-        year: 1964,
-        medium: 'oil on canvas',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Christian_Skredsvig_-_The_Son_of_Man_-_Menneskes%C3%B8nnen_-_Nasjonalmuseet_-_NG.M.00641.png',
-        score: 5,
-        emotion: 'Happy',
-        submitted_by: 'Louis',
-    },
-    {
-        title: 'The Lament for Icarus - Draper',
-        artist: 'Herbert James Draper',
-        year: 1898,
-        medium: 'oil on canvas',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Herbert_Draper_-_The_Lament_for_Icarus_-_Google_Art_ProjectFXD.jpg',
-        score: 0,
-        emotion: 'Happy',
-        submitted_by: 'Michael',
-    },
-    {
-        title: 'The Scream',
-        artist: 'Edward Munch',
-        year: 1898,
-        medium: 'oil on canvas',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg',
-        score: 0,
-        emotion: 'Happy',
-        submitted_by: 'Michael',
-    }
-];
 
 function ImageGallery() {
-    const [pictureData, setPictureData] = useState(null);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [showSearchForm, setShowSearchForm] = useState(false);
+
+  const [artData, setArtData] = useState([]);
+  const [artDetails, setArtDetails] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [showArtVerification, setShowArtVerification] = useState(false);
+
+  //populate page with appriopriate emotion
+    useEffect(() => {
+      fetch('/art/fetchArt/happy', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setArtData(data);
+          console.log(artData);
+        });
+    }, []);
 
     const handleImageClick = (image) => {
       setSelectedImage(image);
@@ -82,20 +41,67 @@ function ImageGallery() {
     const handleAddArtClick = () => {
       setShowSearchForm(true);
     };
-
-    const handleFormSubmit = (formData) => {
-        // Handle the form submission logic here
-        // You can make an API request with the formData
-        console.log('Form data submitted:', formData);
-      };
   
+    const handleFormSubmit = (formData) => {
+      // Send a POST request to /art/submitArt with formData
+      fetch('/art/submitArt', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data)
+              // Set art details and show the ArtVerification
+              setArtDetails(data);
+              setShowSearchForm(false);
+              setShowArtVerification(true);
+          })
+          .catch((error) => {
+              console.error('Error submitting art:', error);
+          });
+
+      setShowSearchForm(false);
+    }
+    
+
     const handleCloseSearchForm = () => {
       setShowSearchForm(false);
     };
+
+    const handleCloseArtVerification = () =>{
+      setShowArtVerification(false);
+    }
+
+    const handleDenyArtVerification = () =>{
+      setShowArtVerification(false);
+      setShowSearchForm(true)
+    }
+
+    const confirmArt = (newArtData) =>{
+      console.log(newArtData)
+
+      fetch('/validateAndSave', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newArtData),
+    })
+        .then((data) => {
+          setShowArtLightbox(false)
+        })
+        .catch((error) => {
+            console.error('Error submitting art:', error);
+        });
+
+    }
   
     return (
       <div className="image-gallery">
-        {artArray.map((art, index) => (
+        {artData.map((art, index) => (
           <Thumbnail key={index} art={art} onClick={() => handleImageClick(art)} />
         ))}
         <button className="add-art-button" onClick={handleAddArtClick}>
@@ -112,8 +118,15 @@ function ImageGallery() {
         </div>
       )}
         {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseLightbox} />}
+        {showArtVerification && <ArtVerification 
+        art={artDetails} 
+        confirmArt={confirmArt}
+        denyArt={handleDenyArtVerification}
+        onClose={handleCloseArtVerification}
+      />}
       </div>
     );
-  }
+}
   
   export default ImageGallery;
+
