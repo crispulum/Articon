@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 const Signup = () => {
     const imageLink = "https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg"
-
+    const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
         username: "",
@@ -12,6 +12,31 @@ const Signup = () => {
         reEnteredPassword: ""
     });
     
+    const onClickSignup = (event) => {
+        event.preventDefault();
+        if(formData.password !== formData.reEnteredPassword){
+            console.log('Password and Re-Entered password does not match');
+            return;
+        }
+        const url = "localhost:8080/api/users";
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: {
+                username: formData.username,
+                password: formData.password
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('User created!');
+            navigate('/login');
+        })
+    }
+
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -60,7 +85,7 @@ const Signup = () => {
                     value={formData.reEnteredPassword}
                     onChange={handleChange}
                 />
-                <button className="signup-page-btn">Sign-up</button>
+                <button className="signup-page-btn" onClick={onClickSignup}>Sign-up</button>
             </form>
             </div>
             <img 

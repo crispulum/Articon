@@ -11,7 +11,18 @@ const Login = () => {
     }); 
     
     const loginOnClick = (e) => {
+        e.preventDefault();
+        const url = "/api/users/login:" + formData.username
+        fetch(url, {
+            method: 'POST',
+            body: {
+                username: formData.username,
+                password: formData.password
+            }
+        });
         
+
+
     }
     const signupOnClick = (e) => {
         e.preventDefault();
