@@ -4,7 +4,7 @@ const artController = require('../controllers/artController')
 const userController = require('../controllers/userController')
 
 
-router.get('/', artController.findArt, (req, res) => res.status(200).json(res.locals.foundArt))
+router.get('/fetchArt/:emotion', artController.findArt, (req, res) => res.status(200).json(res.locals.foundArt))
 
 router.patch('/vote', userController.verifyToken, artController.vote, (req, res) => res.status(200).json(res.locals.voted))
 
