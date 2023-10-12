@@ -1,6 +1,5 @@
 const cheerio = require('cheerio');
 const Art = require('../models/artModel');
-const puppeteer = require('puppeteer')
 //in a general sense, i'm sorry if you have to read this. a lot of these queries are annoying webscraping that makes no sense without the context of how the pages I'm scraping are structured.
 //you can sort of just assume it works, as it mostly does. if you have a better idea than scraping wikipedia for this information, I would LOVE to hear it.
 const artController = {
@@ -208,7 +207,7 @@ const artController = {
 
     async findArt(request, response, next) {
         try {
-            const queriedEmotion = request.params.emotion;            
+            const queriedEmotion = request.params.emotion;
             const returnedArt = await Art.find({ emotion: queriedEmotion })
             response.locals.foundArt = returnedArt;
             return next()
