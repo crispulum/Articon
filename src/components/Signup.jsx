@@ -27,8 +27,8 @@ const Signup = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "username": "tester8",
-                "password": "test"
+                "username": formData.username,
+                "password": formData.password
             })
         })
         // .then(response => response.json())
@@ -39,7 +39,7 @@ const Signup = () => {
         })
     }
 
-
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({

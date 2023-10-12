@@ -23,7 +23,6 @@ const Login = () => {
                 'Content-Type': "application/json"
             }
         })
-        // .then(data => data.json())
         .then(data => {
             console.log(data);
             navigate('/');
@@ -85,49 +84,8 @@ const Login = () => {
         </div>
     )
 
-
-    // return (
-    //     <div className='login'>
-             
-    //         <div className="login-content-container">
-    //             <div className="articon-logo">
-    //                 <p>Articon</p>
-    //             </div>
-    //             <form action="" className="login-form">
-    //                 <label htmlFor="username" className='login-username-label'>
-    //                     Username
-    //                 </label>
-    //                 <input type="text" className="login-username-input" placeholder='Username'/>
-    //                 <label htmlFor="password" className='login-username-label'>
-    //                     Password
-    //                 </label>
-    //                 <input type="text" className="login-password-input" placeholder='Password'/>
-    //                 <div className="login-btns-container">
-    //                     <button className="signup-btn">Sign-up</button>
-    //                     <button className="login-btn">Login</button> 
-    //                 </div>
-    //             </form> 
-    //         </div>
-    //         <img 
-    //             src={imageLink} 
-    //             alt="" 
-    //             className='image-container'
-    //         />
-    //     </div>
-    // )
 }
 
 export default Login;
 
-
-/*
-    https://d1ee3oaj5b5ueh.cloudfront.net/thumbs/635xAUTO_original_article_2020_11_5fb7c1d000644.jpeg
-
-    https://i.pinimg.com/originals/d7/2f/1d/d72f1d8a1b8fe62aa5e8ddaaa0a47867.jpg
-
-    https://i.pinimg.com/736x/62/29/5c/62295c498f626fa8a32563eff3b75547.jpg
-
-    https://i.icanvas.com/JSR25?d=3&sh=v&s=s&p=1&bg=w&t=1665537995
-
-*/
 
