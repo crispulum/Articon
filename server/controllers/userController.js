@@ -2,6 +2,7 @@ const { User } = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const jwt = require('jsonwebtoken')
 
 const userController = {
   // get all users
@@ -93,7 +94,11 @@ const userController = {
         });
       }
       else {
-        console.log('logged in boo')
+        const subUser = user.toObject();
+        const token = jwt.sign(subUser, 'spooky-key')
+        res.cookie('token', token)
+        res.send('Login successful')
+        res.status(200)
       }
     } catch (err) {
       next({
@@ -102,6 +107,35 @@ const userController = {
           err: 'We could not verify the user',
         },
         status: 500,
+      });
+    }
+  },
+  //verify a user's JWT Token
+  async verifyToken(req, res, next) {
+    try {
+      const token = req.cookies.token;
+      console.log('token is: ' + token)
+      if (!token) {
+        //maybe redirect to register/login - this is just temporary
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+      jwt.verify(token, 'spooky-key', (err, user) => {
+        if (err) {
+          console.log('thou shalt not')
+          return res.status(403).json({ message: 'Forbidden' });
+        }
+        else {
+          console.log('access granted')
+          return next()
+        }
+      })
+    } catch (error) {
+      next({
+        log: `verifyUser: ERROR: ${err}`,
+        message: {
+          err: 'User Token invalid',
+        },
+        status: 303,
       });
     }
   },
