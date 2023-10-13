@@ -57,11 +57,6 @@ const Sidebar = () => {
                             Bad
                         </button>
                     </li>
-                    <li>
-                        <button className='emotions-btn random' onClick={() => onClickEmotionsBtn('random')}>
-                            Random
-                        </button>
-                    </li>
                     <li className='username-li-item'>
                         {username}
                     </li>
