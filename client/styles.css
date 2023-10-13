@@ -15,6 +15,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #716E59;
+
 }
 
 .home {
@@ -222,34 +224,50 @@ body {
     color: white;
 }
 
-/* ----- Git merge fix starts here ----- */
+/* ----- Image Gallery ----- */
 
 
-.image-gallery {
+/* .image-gallery {
     border: 1px solid black;
     display: flex;
     flex-wrap: wrap; 
     justify-content: space-between;
     padding: 5px;
+  } */
+.image-gallery {
+    /* border: 1px solid black; */
+    display: grid;
+    grid-template-columns: repeat(4, 25rem);
+    grid-auto-rows: minmax(25rem, auto); 
+    grid-auto-columns: minmax(30rem); 
+    padding: 0px 10px;
+    width: 85vw;
+    box-sizing: border-box;
+    background-color: #716e59;
+    height: auto;
+    margin: 0;
   }
   
-.thumbnail {
+.thumbnail, .add-art-button {
     border: 1px solid black;
-  box-sizing: border-box; 
-  margin: 5px;
-  flex: 0 0 calc(33.33% - 10px); 
-  max-width: calc(33.33% - 10px); 
-  text-align: center; 
-  overflow: hidden;
-  display: flex;
-  flex-direction: column; /* Stack image and title vertically */
-  justify-content: center; /* Vertically center contents */
-  align-items: center; /* Horizontally center contents */
+    box-sizing: border-box; 
+    margin: 5px 0px 5px 5px;
+    /* flex: 0 0 calc(33.33% - 10px);  */
+    /* max-width: calc(33.33% - 10px);  */
+    max-height: 24rem;
+    max-width: 23rem;
+    text-align: center; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Stack image and title vertically */
+    justify-content: center; /* Vertically center contents */
+    align-items: center; /* Horizontally center contents */
+    background-color: #ceccbc;
 }
 
 .thumbnail img {
-  max-width: 100%;
-  max-height: 100%; 
+  max-width: 80%;
+  max-height: 80%; 
 }
 
 .thumbnail h3 {
@@ -309,25 +327,26 @@ body {
   
   .add-art-component {
     border: 1px solid black
+
   }
 
-  .search-form {
+  /* .search-form {
     border: 1px solid black
-  }
+  } */
 
 /* ---- Header, Navbar, Sidebar starts here ---- */
 
 .header {
     display: flex;
     align-items: center;
-    /* width: 100vw; */
-    height: 8vh;
+    height: 8%;
     background-color: #908d78;
     /* background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85); */
     z-index: 1;
     border-bottom: 1px solid rgba(255, 255, 255, 0.345);
     box-sizing: border-box;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* margin-right: 0; */
 }
 
 .header-logo-container {
@@ -393,18 +412,23 @@ nav {
 .sidebar-main-container{
     display: flex;
     flex-direction: row;
-    /* width: 100vw; */
+    width: 100vw;
+    min-height: 92vh;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    align-items: stretch;
 }
 
 
 .sidebar {
     width: 15%;
-    height: 92vh;
     border-right: 1px solid rgba(255, 255, 255, 0.345);
     z-index: 0;
     background-color: #a3a18a;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .sidebar-emotions-ul {
@@ -460,7 +484,7 @@ nav {
     padding: 0.2rem 1rem;
     transition: transform 0.2s, box-shadow 0.2s;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    width: 12vw;
+    width: 100%;
     letter-spacing: 2px;
 }
 
@@ -477,7 +501,7 @@ nav {
     border-bottom: none !important;
     color: #735473;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-    width: 12vw;
+    width: 100%;
     white-space: nowrap;
     overflow:hidden;
     text-overflow: ellipsis;
@@ -508,11 +532,4 @@ nav {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   }
 
-/* ---- integration ---- */
 
-.ig-width-height {
-    box-sizing: border-box;
-    width: 85%;
-    height: 92vh;
-    background-color: lightslategray
-}
