@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 
 const Sidebar = () => {
-    const [username, setUsername] = useState("Louis");
+    
+    
+    const [username, setUsername] = useState("Username");
     const [clickedEmotion, setClickedEmotion] = useState("");
     const [searchValue, setSearchValue] = useState('');
 
