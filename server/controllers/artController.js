@@ -228,6 +228,28 @@ const artController = {
             return next({ error: 'error in voting' })
         }
     },
+    async getRandomPainting(request, response, next) {
+        const randomPaintingHTML = await fetch(`https://commons.wikimedia.org/wiki/Special:RandomInCategory/Painting`)
+        // const JSONRPH = await randomPaintingHTML.json();
+        const variable3 = await randomPaintingHTML.text()
+        const $ = cheerio.load(variable3)
+        const preview = $('.fullImageLink')
+        response.locals.artObj = {}
+        if (preview.length > 0) {
+            const imageSrc = preview.find('img').attr('src');
+
+            if (imageSrc) {
+                response.locals.artObj.thumbnailUrl = imageSrc;
+            }
+        }
+
+        const summaryBox = $('.fileinfotpl-type-artwork');
+
+        if (summaryBox.length == 0) console.log('zero')
+        console.log(response.locals.artObj)
+
+        return next()
+    }
 }
 // these are two helper funcitons to ensure that trueQueryArt is less horrid.
 //future programmers, these can probably be sent off to some utils folder.
