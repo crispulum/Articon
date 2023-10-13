@@ -238,7 +238,7 @@ body {
     /* border: 1px solid black; */
     display: grid;
     grid-template-columns: repeat(4, 25rem);
-    grid-auto-rows: minmax(25rem, auto); 
+    /* grid-auto-rows: minmax(25rem, auto);  */
     grid-auto-columns: minmax(30rem); 
     padding: 0px 10px;
     width: 85vw;
