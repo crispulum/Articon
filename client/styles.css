@@ -7,10 +7,14 @@ font-family: 'Oswald', sans-serif;
 
 */
 
+:root{
+    --header-color: #7e7b66;
+}
 
 body {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 .home {
@@ -310,3 +314,204 @@ body {
   .search-form {
     border: 1px solid black
   }
+
+/* ---- Header, Navbar, Sidebar starts here ---- */
+
+.header {
+    display: flex;
+    align-items: center;
+    /* width: 100vw; */
+    height: 8vh;
+    background-color: #908d78;
+    /* background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85); */
+    z-index: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.345);
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo-container {
+    height: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.345);
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.345); */
+    width: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9a9882;
+}
+
+.logo-btn {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    color: white;
+    font-size: 3rem;
+    font-family: 'Mooli', sans-serif;
+}
+
+.logo-btn:hover, .emotions-link-btn:hover {
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Cabin, sans-serif;
+}
+
+.nav-ul {
+    padding: none;
+    margin: none;
+}
+.nav-ul li, .sidebar-emotions-ul {
+    list-style: none;
+    display: inline;
+    padding-right: 1.5rem;
+    font-size: 1.4rem;
+    
+}
+
+.main-search-bar {
+    /* width: 18rem;*/
+    border: black 1px solid;
+    padding: 8px 16px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+    width: 20rem;
+    transition: border-color 0.3s;
+}
+
+.Link {
+    color: white;
+    text-decoration: none;
+}
+
+
+.sidebar-main-container{
+    display: flex;
+    flex-direction: row;
+    /* width: 100vw; */
+}
+
+
+.sidebar {
+    width: 15%;
+    height: 92vh;
+    border-right: 1px solid rgba(255, 255, 255, 0.345);
+    z-index: 0;
+    background-color: #a3a18a;
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-emotions-ul {
+    list-style: none;
+    display: inline;
+    font-size: 1.4rem;
+    padding: 0;
+}
+
+.sidebar-emotions-ul li{
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.376);
+}
+
+
+.angry {
+    color: red;
+  }
+  
+.happy {
+    color: yellow;
+}
+
+.sad {
+    color: blue;
+}
+
+.surprised {
+    color: purple; /* A bright and contrasting color often associated with surprise */
+}
+
+.disgusted {
+    color: green;
+}
+
+.fearful {
+    color: darkred; /* A dark and intense color associated with fear */
+}
+
+.bad {
+    color: black; /* Often associated with negativity and evil */
+}   
+
+.random {
+    color: white;
+}
+
+.emotions-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    padding: 0.2rem 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    width: 12vw;
+    letter-spacing: 2px;
+}
+
+.emotions-btn:hover {
+    transform: scale(1.15);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.username-li-item {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    border-bottom: none !important;
+    color: #735473;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    width: 12vw;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+
+.dummy-main {
+    width: 85%;
+    height: 92vh;
+    background-color: lightslategray;
+}
+
+
+/* ---- SignOffLogInBtn ---- */
+
+.signOffLogInBtn {
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 1.4rem;
+    color: white;
+    padding: 0.2rem 1rem;
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.signOffLogInBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #b0ab95;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+
+  
+
