@@ -53,8 +53,8 @@ function ImageGallery() {
       })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data)
-              // Set art details and show the ArtVerification
+            //had if statement for if the response returns the error object      
+            // Set art details and show the ArtVerification
               setArtDetails(data);
               setShowSearchForm(false);
               setShowArtVerification(true);
@@ -65,7 +65,45 @@ function ImageGallery() {
 
       setShowSearchForm(false);
     }
-    
+
+    const confirmArt = (userInputData) => {
+      // Use the userInputData in your logic
+      console.log(userInputData);
+  
+      const { title, thumbnailURL, artist, year, medium, url, emotion, submitted_by } = userInputData;
+      // submitted_by field should now be on the userInputData. You can add emotion as well.
+      const queryArtBody = {
+        validatedArtObject: {
+          title: title,
+          artist: artist,
+          year: year,
+          medium: medium,
+          thumbnailURL: thumbnailURL,
+          url: url,
+          emotion: emotion,
+          submitted_by: submitted_by
+        }
+      }
+
+      console.log(queryArtBody)
+
+      fetch('/art/validateAndSave', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(queryArtBody),
+    })
+        .then(response =>{
+          if (response.ok){
+            console.log("successfully added art to the database")
+          }
+        })
+        .catch((error) => {
+            console.error('Error submitting art:', error);
+        });
+
+    }
 
     const handleCloseSearchForm = () => {
       setShowSearchForm(false);
@@ -80,24 +118,6 @@ function ImageGallery() {
       setShowSearchForm(true)
     }
 
-    const confirmArt = (newArtData) =>{
-      console.log(newArtData)
-
-      fetch('/validateAndSave', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newArtData),
-    })
-        .then((data) => {
-          setShowArtLightbox(false)
-        })
-        .catch((error) => {
-            console.error('Error submitting art:', error);
-        });
-
-    }
   
     return (
       <div className="image-gallery">
