@@ -19,7 +19,7 @@ router.post('/validateAndSave', userController.verifyToken,
     artController.validateAndSave,
     (req, res) => res.status(200).json(res.locals.savedArt))
 
-
-router.get('/randomArt', artController.getRandomPainting, (req, res) => res.status(200).json({message: 'yahoolo'}))
+//failed feature - see artController for more details
+//router.get('/randomArt', artController.getRandomPainting, (req, res) => res.status(200).json({message: 'yahooo'}))
 
 module.exports = router;
