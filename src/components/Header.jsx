@@ -66,12 +66,6 @@ const Header = () => {
                 </ul>
             </nav>
         </header>
-        <div className="sidebar-main-container">
-            <Sidebar />
-            <div className="dummy-main">
-
-            </div>
-        </div>
         </>
     )
 }

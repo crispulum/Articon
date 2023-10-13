@@ -58,6 +58,11 @@ app.use(express.static(path.join(__dirname, '..', 'build')));
 app.use('/art', artApiRouter);
 app.use('/api/users', userRouter);
 
+// added this so that when the user refreshes the page, they do not get a  404 error and instead get rerouted correctly
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+}); 
+
 app.use((req, res) => res.status(404).send('Error 404, path not found'));
 
 

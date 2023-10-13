@@ -17,16 +17,19 @@ function ImageGallery() {
 
   //populate page with appriopriate emotion
     useEffect(() => {
-      fetch('/art/fetchArt/happy', {
+      fetch("/art/fetchArt/happy", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       })
-        .then((response) => response.json())
+        .then((response) => {
+            return response.json()
+        })
         .then((data) => {
-          setArtData(data);
-          console.log(artData);
+          console.log(data);
+            setArtData(data);
+        //   console.log(artData);
         });
     }, []);
 
@@ -148,5 +151,5 @@ function ImageGallery() {
     );
 }
   
-  export default ImageGallery;
+export default ImageGallery;
 

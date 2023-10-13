@@ -3,18 +3,18 @@ import {useNavigate} from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import ImageGallery from './ImageGallery';
+import Header from './Header';
+import Sidebar from './Sidebar';
 
 const Main = () => {
     return (
-        <div>
-            <ImageGallery/>
-            {/* 
-            <Routes>
-                // routes will go here when we start to make the main components of our website
-                ex: <Route path="/main/happy" element={<Happy />}></Route>
-            </Routes>     
-            */}
-        </div>
+        <>
+            <Header />
+            <div className="sidebar-main-container">
+                <Sidebar />
+                <ImageGallery />    
+            </div>
+        </>
     )
 }
 

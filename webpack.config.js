@@ -19,6 +19,7 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       "/api": "http://localhost:3000",
+      "/art": "http://localhost:3000"
     },
   },
   plugins: [

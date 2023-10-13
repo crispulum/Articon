@@ -9,7 +9,7 @@ const SignOffLogInBtn = () => {
     useEffect(() => {
         const hasCookie = document.cookie.includes('token');
         if (hasCookie) {
-            setSignOffLogInValue('Sign Off');
+            setSignOffLogInValue('Sign Out');
         } 
         else {
             setSignOffLogInValue('Login');
@@ -25,7 +25,7 @@ const SignOffLogInBtn = () => {
                 className='signOffLogInBtn'
                 onClick={
                     () => {
-                        if(signOffLogInValue === 'Sign Off'){
+                        if(signOffLogInValue === 'Sign Out'){
                             const name = 'token'
                             document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
                         }
