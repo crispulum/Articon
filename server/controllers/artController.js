@@ -1,5 +1,7 @@
 const cheerio = require('cheerio');
 const Art = require('../models/artModel');
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 //in a general sense, i'm sorry if you have to read this. a lot of these queries are annoying webscraping that makes no sense without the context of how the pages I'm scraping are structured.
 //you can sort of just assume it works, as it mostly does. if you have a better idea than scraping wikipedia for this information, I would LOVE to hear it.
 const artController = {
@@ -161,8 +163,8 @@ const artController = {
     //also this should very obviously be in postgres.... but I'm lazy?
     async saveNewArt(request, response, next) {
         try {
-            console.log(response.locals.artObj)
-
+            //console.log(response.locals.artObj)
+            const personSubmitting = getUserName(request.cookies.token)
             const newPendingArt = {
 
                 title: response.locals.artObj.title,
@@ -172,7 +174,7 @@ const artController = {
                 thumbnailURL: response.locals.artObj.thumbnailUrl,
                 url: response.locals.artObj.bigUrl,
                 emotion: request.body.emotion,
-                submitted_by: request.body.submitted_by
+                submitted_by: personSubmitting
 
 
 
@@ -228,6 +230,36 @@ const artController = {
             return next({ error: 'error in voting' })
         }
     },
+
+
+    //I regrettably have to abdondon this feature. The inconsistency of the data is too much to overcome. 
+    //On famous-ish paintings, things are at least passably moderated - on these random no-name paintings, there's absolutely no consistency, and no way to consistently scrap them.
+    //If whoever is iterating on this wants to give it a stab, be my guest. But for now, I'm Old Yeller-ing this feature. 
+    async getRandomPainting(request, response, next) {
+        const randomPaintingHTML = await fetch(`https://commons.wikimedia.org/wiki/Special:RandomInCategory/Painting`)
+        // const JSONRPH = await randomPaintingHTML.json();
+        const variable3 = await randomPaintingHTML.text()
+        const $ = cheerio.load(variable3)
+        const preview = $('.fullImageLink')
+        response.locals.artObj = {}
+        if (preview.length > 0) {
+            const imageSrc = preview.find('img').attr('src');
+
+            if (imageSrc) {
+                response.locals.artObj.thumbnailUrl = imageSrc;
+            }
+        }
+
+        const summaryBox = $('.fileinfotpl-type-artwork');
+
+        if (summaryBox.length == 0) console.log('zero')
+        const mediumContainer = summaryBox.find('#fileinfotpl_art_title').next();
+        response.locals.artObj.Medium = mediumContainer.contents().text().trim();
+        console.log(mediumContainer.contents().text().trim())
+        console.log(response.locals.artObj)
+
+        return next()
+    }
 }
 // these are two helper funcitons to ensure that trueQueryArt is less horrid.
 //future programmers, these can probably be sent off to some utils folder.
@@ -303,3 +335,11 @@ async function findPageTitle(query) {
 }
 
 module.exports = artController;
+
+
+//another random helper function
+function getUserName(string) {
+
+    const parts = string.split(".")
+    return JSON.parse(atob(parts[1])).username
+}
