@@ -9,11 +9,11 @@ import ArtVerification from './ArtVerification';
 
 function ImageGallery() {
 
-  const [artData, setArtData] = useState([]);
-  const [artDetails, setArtDetails] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showSearchForm, setShowSearchForm] = useState(false);
-  const [showArtVerification, setShowArtVerification] = useState(false);
+    const [artData, setArtData] = useState([]);
+    const [artDetails, setArtDetails] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [showSearchForm, setShowSearchForm] = useState(false);
+    const [showArtVerification, setShowArtVerification] = useState(false);
 
   //populate page with appriopriate emotion
     useEffect(() => {
@@ -27,16 +27,16 @@ function ImageGallery() {
             return response.json()
         })
         .then((data) => {
-          console.log(data);
+
             setArtData(data);
-        //   console.log(artData);
+            console.log(artData);
         });
     }, []);
 
     const handleImageClick = (image) => {
       setSelectedImage(image);
     };
-  
+    
     const handleCloseLightbox = () => {
       setSelectedImage(null);
     };
@@ -44,7 +44,7 @@ function ImageGallery() {
     const handleAddArtClick = () => {
       setShowSearchForm(true);
     };
-  
+    
     const handleFormSubmit = (formData) => {
       // Send a POST request to /art/submitArt with formData
       fetch('/art/submitArt', {

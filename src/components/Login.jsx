@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Login = () => {
     const imageLink = "https://www.artnews.com/wp-content/uploads/2017/05/cold-mountain-3.jpg"
@@ -10,6 +11,13 @@ const Login = () => {
         password: ""
     }); 
     
+    
+
+    function setCookie() {
+        // Set a cookie named "username" with the value from formData.username
+        Cookies.set('username', formData.username);
+    }   
+
     const loginOnClick = (e) => {
         e.preventDefault();
         const url = "/api/users/login"
@@ -25,6 +33,7 @@ const Login = () => {
         })
         .then(data => {
             console.log(data);
+            setCookie();
             navigate('/');
         })
     }
