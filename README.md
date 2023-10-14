@@ -23,7 +23,8 @@ Our app is built using the following technologies and libraries:
 - **React**: A JavaScript library for building user interfaces.
 - **Express**: A Node.js web application framework for creating APIs and handling server-side logic.
 - **Cheerio**: A library for web scraping and parsing HTML and XML.
-- **A Bunch More**: God knows how many minor packages we're using.
+- **MongoDB**: A No SQL database management system designed to store, manage and retrieve data in a flexible and scalable way.
+- **Various supporting projects**: A multitude of smaller packages contribute to the functionality and performance of our application.
 
 Here are some examples of how to use the Artwork Reaction Database:
 
@@ -35,7 +36,7 @@ Here are some examples of how to use the Artwork Reaction Database:
 
 ## Contributing
 
-We do not welcome contributions from the community due to our unwillingness to review pull requests. If you'd like to contribute to the project, please do not do so.
+We appreciate your interest in contributing to our project.However, we regret to inform you that we are not currently accepting pull requests for review.
 
 ## License
 
