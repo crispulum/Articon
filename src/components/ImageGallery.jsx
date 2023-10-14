@@ -5,7 +5,7 @@ import Lightbox from './Lightbox';
 import AddArtComponent from './AddArtComponent';
 import SearchForm from './SearchForm';
 import ArtVerification from './ArtVerification';
-
+import MessageBox from './MessageBox'
 
 function ImageGallery() {
 
@@ -15,6 +15,18 @@ function ImageGallery() {
   const [showSearchForm, setShowSearchForm] = useState(false);
   const [showArtVerification, setShowArtVerification] = useState(false);
 
+  const [message, setMessage] = useState('');
+  const [showMessageBox, setShowMessageBox] = useState(false);
+
+  //closing any boxes client side
+  const handleCloseAll = () =>{
+    setShowSearchForm(false);
+    setShowArtVerification(false);
+    setSelectedImage(null);
+    setShowMessageBox(false);
+  }
+  
+  
   //populate page with appriopriate emotion
     useEffect(() => {
       fetch("/art/fetchArt/happy", {
@@ -37,10 +49,6 @@ function ImageGallery() {
       setSelectedImage(image);
     };
   
-    const handleCloseLightbox = () => {
-      setSelectedImage(null);
-    };
-
     const handleAddArtClick = () => {
       setShowSearchForm(true);
     };
@@ -56,11 +64,18 @@ function ImageGallery() {
       })
           .then((response) => response.json())
           .then((data) => {
-            //had if statement for if the response returns the error object      
-            // Set art details and show the ArtVerification
+            const errorMessage = "Error - wikimedia article not found";
+    
+            if (data.err === errorMessage) {
+              setShowSearchForm(false);
+              setMessage(`We're having trouble finding that piece, want to try again?`);
+              setShowMessageBox(true);
+            } else {
+              // Set art details and show the ArtVerification
               setArtDetails(data);
               setShowSearchForm(false);
               setShowArtVerification(true);
+            }
           })
           .catch((error) => {
               console.error('Error submitting art:', error);
@@ -70,11 +85,9 @@ function ImageGallery() {
     }
 
     const confirmArt = (userInputData) => {
-      // Use the userInputData in your logic
-      console.log(userInputData);
-  
+
       const { title, thumbnailURL, artist, year, medium, url, emotion, submitted_by } = userInputData;
-      // submitted_by field should now be on the userInputData. You can add emotion as well.
+
       const queryArtBody = {
         validatedArtObject: {
           title: title,
@@ -88,8 +101,6 @@ function ImageGallery() {
         }
       }
 
-      console.log(queryArtBody)
-
       fetch('/art/validateAndSave', {
         method: 'POST',
         headers: {
@@ -97,23 +108,18 @@ function ImageGallery() {
         },
         body: JSON.stringify(queryArtBody),
     })
-        .then(response =>{
+      .then(response => {
           if (response.ok){
-            console.log("successfully added art to the database")
+              console.log('successfully added art to the database');
+              setMessage('Art was successfully added');
+              handleCloseAll();
+              setShowMessageBox(true);
           }
-        })
+          })
         .catch((error) => {
             console.error('Error submitting art:', error);
         });
 
-    }
-
-    const handleCloseSearchForm = () => {
-      setShowSearchForm(false);
-    };
-
-    const handleCloseArtVerification = () =>{
-      setShowArtVerification(false);
     }
 
     const handleDenyArtVerification = () =>{
@@ -121,35 +127,42 @@ function ImageGallery() {
       setShowSearchForm(true)
     }
 
-  
     return (
       <div className="image-gallery">
         {artData.map((art, index) => (
           <Thumbnail key={index} art={art} onClick={() => handleImageClick(art)} />
         ))}
+
         <button className="add-art-button" onClick={handleAddArtClick}>
           Add Art
         </button>
+
         {showSearchForm && (
         <div className="lightbox">
           <div className="lightbox-content">
-            <button className="close-button" onClick={handleCloseSearchForm}>
+            <button className="close-button" onClick={handleCloseAll}>
               X
             </button>
-            <SearchForm onSubmit={handleFormSubmit} onClose={handleCloseSearchForm} />
+            <SearchForm onSubmit={handleFormSubmit} onClose={handleCloseAll} />
           </div>
         </div>
       )}
-        {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseLightbox} />}
+
+        {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseAll} />}
+
         {showArtVerification && <ArtVerification 
-        art={artDetails} 
-        confirmArt={confirmArt}
-        denyArt={handleDenyArtVerification}
-        onClose={handleCloseArtVerification}
+          art={artDetails} 
+          confirmArt={confirmArt}
+          denyArt={handleDenyArtVerification}
+          onClose={handleCloseAll}
       />}
-      </div>
+
+    {showMessageBox && <MessageBox message={message} onClose={handleCloseAll} />}
+
+    </div>
     );
 }
   
 export default ImageGallery;
+
 
