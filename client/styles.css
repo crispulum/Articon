@@ -238,7 +238,7 @@ body {
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
     padding: 0px 10px;
     width: 85vw;
     box-sizing: border-box;
@@ -251,8 +251,6 @@ body {
     border: 1px solid black;
     box-sizing: border-box; 
     margin: 5px 0px 5px 5px;
-    /* flex: 0 0 calc(33.33% - 10px);  */
-    /* max-width: calc(33.33% - 10px);  */
     max-height: 24rem;
     max-width: 35rem;
     text-align: center; 
@@ -341,22 +339,26 @@ body {
     height: 8%;
     background-color: var(--header-color);
     /* background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85); */
-    z-index: 1;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.345);
+    z-index: 2;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.345); */
+    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1); */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     /* margin-right: 0; */
 }
 
 .header-logo-container {
     height: 100%;
-    border-right: 1px solid rgba(255, 255, 255, 0.345);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.345); */
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.345); */
     width: 15vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #9a9882;
+    /* background-color: #9a9882; */
+    background-color: var(--header-color);
     /* background-color: var(--header-color); */
 }
 
@@ -418,18 +420,23 @@ nav {
     margin: 0;
     padding: 0;
     align-items: stretch;
+    z-index: 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 
 .sidebar {
     width: 15%;
-    border-right: 1px solid rgba(255, 255, 255, 0.345);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.345); */
     z-index: 0;
     background-color: #a3a18a;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
     font-family: 'Mooli', sans-serif;
+    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.1); */
+    /* box-shadow: -2px 0px 5px rgba(255, 255, 255, 0.2), 0; */
+    box-shadow: 0, 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-emotions-ul {
@@ -536,3 +543,4 @@ nav {
     background-color: #b0ab95;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
+
