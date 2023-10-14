@@ -210,7 +210,7 @@ const artController = {
     async findArt(request, response, next) {
         try {
             const queriedEmotion = request.params.emotion;
-            const returnedArt = await Art.find({ emotion: queriedEmotion })
+            const returnedArt = await Art.find({ emotion: queriedEmotion }).sort({ score: - 1})
             response.locals.foundArt = returnedArt;
             return next()
         } catch (error) {
