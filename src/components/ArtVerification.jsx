@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-function ArtVerification({ art, confirmArt, denyArt, onClose }) {
+function ArtVerification({ art, emotion, confirmArt, denyArt, onClose }) {
   const [verificationData, setVerificationData] = useState({
     title: art.title || '',
     artist: art.artist || '',
     year: art.year || '',
     medium: art.medium || '',
-    emotion: art.emotion || '',
+    emotion: emotion || '',
   });
 
   const handleConfirm = () => {
@@ -30,9 +30,9 @@ function ArtVerification({ art, confirmArt, denyArt, onClose }) {
       artist: art.artist || '',
       year: art.year || '',
       medium: art.medium || '',
-      emotion: art.emotion || '',
+      emotion: emotion || '',
     });
-  }, [art]);
+  }, [art, emotion]);
 
   return (
     <div className="lightbox">

@@ -63,10 +63,14 @@ function ImageGallery({ emotion }) {
           .then((response) => response.json())
           .then((data) => {
             const errorMessage = "Error - wikimedia article not found";
-    
+            const unAuthorized = "Unauthorized"
             if (data.err === errorMessage) {
               setShowSearchForm(false);
               setMessage(`We're having trouble finding that piece... Want to try again?`);
+              setShowMessageBox(true);
+            } else if (data.message === unAuthorized) {
+              setShowSearchForm(false);
+              setMessage(`Please sign in to upload new art`);
               setShowMessageBox(true);
             } else {
               // Set art details and show the ArtVerification
@@ -149,7 +153,8 @@ function ImageGallery({ emotion }) {
         {selectedImage && <Lightbox art={selectedImage} onClose={handleCloseAll} />}
 
         {showArtVerification && <ArtVerification 
-          art={artDetails} 
+          art={artDetails}
+          emotion={emotion}
           confirmArt={confirmArt}
           denyArt={handleDenyArtVerification}
           onClose={handleCloseAll}
@@ -162,5 +167,6 @@ function ImageGallery({ emotion }) {
 }
   
 export default ImageGallery;
+
 
 
