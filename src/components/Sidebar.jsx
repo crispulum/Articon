@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-
+ import Cookies from 'js-cookie';
 
 const Sidebar = () => {
     
     
-    const [username, setUsername] = useState("Username");
+    const [username, setUsername] = useState("");
     const [clickedEmotion, setClickedEmotion] = useState("");
     const [searchValue, setSearchValue] = useState('');
 
@@ -19,6 +19,18 @@ const Sidebar = () => {
 
     }
 
+    useEffect(() => {
+        // Check if the "username" cookie exists
+        if (Cookies.get('username')) {
+            // The "username" cookie exists, and you can access its value like this:
+            const sentUsername = Cookies.get('username');
+            setUsername(sentUsername);
+        } 
+        else {
+            // The "username" cookie doesn't exist
+            console.log('Username cookie not found.');
+        }
+    },[username])
     
     return(
         <>  

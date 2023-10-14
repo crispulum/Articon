@@ -6,7 +6,9 @@ import ImageGallery from './ImageGallery';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-const Main = () => {
+const Main = (props) => {
+    const {emotion} = props;
+    
     return (
         <>
             <Header />

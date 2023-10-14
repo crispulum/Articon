@@ -9,11 +9,11 @@ import MessageBox from './MessageBox'
 
 function ImageGallery() {
 
-  const [artData, setArtData] = useState([]);
-  const [artDetails, setArtDetails] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showSearchForm, setShowSearchForm] = useState(false);
-  const [showArtVerification, setShowArtVerification] = useState(false);
+    const [artData, setArtData] = useState([]);
+    const [artDetails, setArtDetails] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [showSearchForm, setShowSearchForm] = useState(false);
+    const [showArtVerification, setShowArtVerification] = useState(false);
 
   const [message, setMessage] = useState('');
   const [showMessageBox, setShowMessageBox] = useState(false);
@@ -39,20 +39,25 @@ function ImageGallery() {
             return response.json()
         })
         .then((data) => {
-          console.log(data);
+
             setArtData(data);
-        //   console.log(artData);
+            console.log(artData);
         });
     }, []);
 
     const handleImageClick = (image) => {
       setSelectedImage(image);
     };
-  
+
+    
+    const handleCloseLightbox = () => {
+      setSelectedImage(null);
+    };
+
     const handleAddArtClick = () => {
       setShowSearchForm(true);
     };
-  
+    
     const handleFormSubmit = (formData) => {
       // Send a POST request to /art/submitArt with formData
       fetch('/art/submitArt', {
