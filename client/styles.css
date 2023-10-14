@@ -8,7 +8,6 @@ font-family: 'Oswald', sans-serif;
 */
 
 :root{
-    /* --header-color: #7e7b66; */
     --header-color: #908d78;
 }
 
@@ -227,14 +226,6 @@ body {
 
 /* ----- Image Gallery ----- */
 
-
-/* .image-gallery {
-    border: 1px solid black;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between;
-    padding: 5px;
-  } */
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -277,7 +268,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(0, 0, 0, 0.7); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -312,7 +302,7 @@ body {
   
   .lightbox img {
     max-width: 100%;
-    max-height: 80%; /* Adjust this as needed */
+    max-height: 80%; 
   }
   
   
@@ -327,10 +317,6 @@ body {
 
   }
 
-  /* .search-form {
-    border: 1px solid black
-  } */
-
 /* ---- Header, Navbar, Sidebar starts here ---- */
 
 .header {
@@ -338,28 +324,18 @@ body {
     align-items: center;
     height: 8%;
     background-color: var(--header-color);
-    /* background: radial-gradient(#d7d5bf,#c4c2a9, #a19f8d, #9d9b85); */
     z-index: 2;
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.345); */
-    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1); */
-    /* box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1); */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    /* margin-right: 0; */
 }
 
 .header-logo-container {
     height: 100%;
-    /* border-right: 1px solid rgba(255, 255, 255, 0.345); */
-    /* border-bottom: 1px solid rgba(255, 255, 255, 0.345); */
     width: 15vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #9a9882; */
     background-color: var(--header-color);
-    /* background-color: var(--header-color); */
 }
 
 .logo-btn {
@@ -427,15 +403,12 @@ nav {
 
 .sidebar {
     width: 15%;
-    /* border-right: 1px solid rgba(255, 255, 255, 0.345); */
     z-index: 0;
     background-color: #a3a18a;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
     font-family: 'Mooli', sans-serif;
-    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 0, 0, 0.1); */
-    /* box-shadow: -2px 0px 5px rgba(255, 255, 255, 0.2), 0; */
     box-shadow: 0, 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -469,7 +442,7 @@ nav {
 }
 
 .surprised {
-    color: purple; /* A bright and contrasting color often associated with surprise */
+    color: purple; 
 }
 
 .disgusted {
@@ -477,11 +450,11 @@ nav {
 }
 
 .fearful {
-    color: darkred; /* A dark and intense color associated with fear */
+    color: darkred; 
 }
 
 .bad {
-    color: black; /* Often associated with negativity and evil */
+    color: black;
 }   
 
 .random {
@@ -510,7 +483,6 @@ nav {
     justify-content: center;
     font-size: 2rem;
     border-bottom: none !important;
-    /* color: #735473; */
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -544,3 +516,14 @@ nav {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+/* ---- stuff ---- */
+.ul-left {
+    display: flex;
+    align-items: center;
+}
+
+.ul-left li {
+    /* margin-right: 18rem; */
+    font-family: 'Mooli', sans-serif;
+    color: white;
+}

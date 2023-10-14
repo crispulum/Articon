@@ -10,7 +10,7 @@ const Main = ({ handleEmotion, emotion }) => {
     
     return (
         <>
-            <Header handleEmotion={handleEmotion}/>
+            <Header handleEmotion={handleEmotion} emotion={emotion}/>
             <div className="sidebar-main-container">
                 <Sidebar handleEmotion={handleEmotion}/>
                 <ImageGallery emotion={emotion} />    
