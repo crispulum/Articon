@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 
 import Thumbnail from './Thumbnail';
 import Lightbox from './Lightbox';
-import AddArtComponent from './AddArtComponent';
 import SearchForm from './SearchForm';
 import ArtVerification from './ArtVerification';
 import MessageBox from './MessageBox'
 
-function ImageGallery() {
+function ImageGallery({ emotion }) {
 
-    const [artData, setArtData] = useState([]);
-    const [artDetails, setArtDetails] = useState(null);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [showSearchForm, setShowSearchForm] = useState(false);
-    const [showArtVerification, setShowArtVerification] = useState(false);
+  const [artData, setArtData] = useState([]);
+  const [artDetails, setArtDetails] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [showSearchForm, setShowSearchForm] = useState(false);
+  const [showArtVerification, setShowArtVerification] = useState(false);
 
+  //state for populating and showing the message box
   const [message, setMessage] = useState('');
   const [showMessageBox, setShowMessageBox] = useState(false);
 
@@ -26,10 +26,9 @@ function ImageGallery() {
     setShowMessageBox(false);
   }
   
-  
   //populate page with appriopriate emotion
     useEffect(() => {
-      fetch("/art/fetchArt/happy", {
+      fetch(`/art/fetchArt/${emotion}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -39,11 +38,10 @@ function ImageGallery() {
             return response.json()
         })
         .then((data) => {
-
             setArtData(data);
-            console.log(artData);
+            console.log(artData)
         });
-    }, []);
+    }, [emotion]);
 
     const handleImageClick = (image) => {
       setSelectedImage(image);
@@ -68,7 +66,7 @@ function ImageGallery() {
     
             if (data.err === errorMessage) {
               setShowSearchForm(false);
-              setMessage(`We're having trouble finding that piece, want to try again?`);
+              setMessage(`We're having trouble finding that piece... Want to try again?`);
               setShowMessageBox(true);
             } else {
               // Set art details and show the ArtVerification

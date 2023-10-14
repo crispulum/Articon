@@ -6,15 +6,14 @@ import ImageGallery from './ImageGallery';
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-const Main = (props) => {
-    const {emotion} = props;
+const Main = ({ handleEmotion, emotion }) => {
     
     return (
         <>
-            <Header />
+            <Header handleEmotion={handleEmotion}/>
             <div className="sidebar-main-container">
-                <Sidebar />
-                <ImageGallery />    
+                <Sidebar handleEmotion={handleEmotion}/>
+                <ImageGallery emotion={emotion} />    
             </div>
         </>
     )

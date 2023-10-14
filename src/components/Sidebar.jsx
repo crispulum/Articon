@@ -2,21 +2,13 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
  import Cookies from 'js-cookie';
 
-const Sidebar = () => {
+const Sidebar = ({ handleEmotion }) => {
     
     
     const [username, setUsername] = useState("");
-    const [clickedEmotion, setClickedEmotion] = useState("");
-    const [searchValue, setSearchValue] = useState('');
-
-    const handleInputChange = (event) => {
-        setSearchValue(event.target.value);
-    };
-
 
     const onClickEmotionsBtn = (emotion) => {
-        
-
+        handleEmotion(emotion)
     }
 
     useEffect(() => {

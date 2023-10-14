@@ -70,7 +70,7 @@ const Signup = () => {
                     Password
                 </label>
                 <input 
-                    type="text" 
+                    type="password" 
                     className="signup-password-input" 
                     placeholder='Password'
                     name='password'
@@ -81,7 +81,7 @@ const Signup = () => {
                     Re-Enter Password
                 </label>
                 <input 
-                    type="text" 
+                    type="password" 
                     className="signup-reenter-password-input" 
                     placeholder='Re-Enter Password'
                     name='reEnteredPassword'

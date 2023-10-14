@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MessageBox({ message, onClose}) {
+function MessageBox({ message, onClose }) {
 
       return (
         <div className="lightbox">

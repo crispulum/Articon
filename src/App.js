@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import LandingPages from "./components/LandingPages.jsx";
-import Main from "./components/Main.jsx"
 import "../client/styles.css";
 
 

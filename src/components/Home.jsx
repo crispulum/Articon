@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ handleEmotion }) => {
     // this is how we'll navigate to different emotion pages
    
     const navigate = useNavigate();
@@ -16,9 +16,11 @@ const Home = () => {
         navigate("/login")
     }
     const handleSearch = () => {
-        if (searchValue === 'test') {
-          navigate('/main');
-     }
+        handleEmotion(searchValue);
+    //     if (searchValue === 'test') {
+    //       navigate('/main');
+    //  }
+        navigate('/main');
     };
 
     const handleInputChange = (event) => {
