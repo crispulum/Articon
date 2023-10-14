@@ -49,11 +49,6 @@ function ImageGallery() {
       setSelectedImage(image);
     };
 
-    
-    const handleCloseLightbox = () => {
-      setSelectedImage(null);
-    };
-
     const handleAddArtClick = () => {
       setShowSearchForm(true);
     };
