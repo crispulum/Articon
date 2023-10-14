@@ -10,7 +10,6 @@ function ArtVerification({ art, confirmArt, denyArt, onClose }) {
   });
 
   const handleConfirm = () => {
-    // Pass the user input data to the confirmArt function
     confirmArt(verificationData);
   };
 
@@ -53,6 +52,7 @@ function ArtVerification({ art, confirmArt, denyArt, onClose }) {
               name="title"
               value={verificationData.title}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div>
@@ -63,6 +63,7 @@ function ArtVerification({ art, confirmArt, denyArt, onClose }) {
               name="artist"
               value={verificationData.artist}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div>
@@ -93,6 +94,7 @@ function ArtVerification({ art, confirmArt, denyArt, onClose }) {
               name="emotion"
               value={verificationData.emotion}
               onChange={handleInputChange}
+              required
             />
           </div>
         </form>

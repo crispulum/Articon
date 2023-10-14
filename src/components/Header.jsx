@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SignOffLogInBtn from './SignOffLogInBtn.jsx';
 import Sidebar from './Sidebar.jsx';
 
-const Header = () => {
+const Header = ({ handleEmotion }) => {
     const navigate = useNavigate();
     const logoOnClick = () => {
         navigate('/')
@@ -12,6 +12,7 @@ const Header = () => {
     
     //---
     const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
+    const [searchValue, setSearchValue] = useState("")
 
     useEffect(() => {
       // Update the viewportHeight whenever the window is resized
@@ -28,7 +29,21 @@ const Header = () => {
 
     //--- 
 
+    const handleSearch = () => {
+        handleEmotion(searchValue);
+    };
 
+    const handleInputChange = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+    const search = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // Call the search function
+            handleSearch();
+        }
+    }
 
     return(
         <>
@@ -44,8 +59,8 @@ const Header = () => {
                             name="search"
                             className="main-search-bar"
                             placeholder="Search for more emotions!"
-                            // value={searchValue}
-                            // onChange={handleInputChange}
+                            onKeyPress={search}
+                            onChange={handleInputChange}
                         />
                     </li>
                 </ul>
@@ -68,6 +83,7 @@ const Header = () => {
         </header>
         </>
     )
+    
 }
 
 
