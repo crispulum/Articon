@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const SignOffLogInBtn = () => {
     const [signOffLogInValue, setSignOffLogInValue] = useState('Login');
@@ -23,12 +24,11 @@ const SignOffLogInBtn = () => {
         <>  
             <button 
                 className='signOffLogInBtn'
-                onClick={
-                    () => {
-                        if(signOffLogInValue === 'Sign Out'){
-                            const name = 'token'
-                            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-                        }
+                onClick={ () => {
+                    if (signOffLogInValue === 'Sign Out') {
+                        Cookies.remove('token'); 
+                        Cookies.remove('username'); 
+                    }
                         navigate('/login');
                     }
                 }
