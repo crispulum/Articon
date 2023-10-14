@@ -3,8 +3,9 @@ import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SignOffLogInBtn from './SignOffLogInBtn.jsx';
 import Sidebar from './Sidebar.jsx';
+import EmotionDisplay from './EmotionDisplay.jsx';
 
-const Header = ({ handleEmotion }) => {
+const Header = ({ handleEmotion, emotion }) => {
     const navigate = useNavigate();
     const logoOnClick = () => {
         navigate('/')
@@ -62,6 +63,9 @@ const Header = ({ handleEmotion }) => {
                             onKeyPress={search}
                             onChange={handleInputChange}
                         />
+                    </li>
+                    <li>
+                        <EmotionDisplay emotion={emotion} />
                     </li>
                 </ul>
                 <ul className="nav-ul ul-right">
