@@ -2,39 +2,38 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SignOffLogInBtn from './SignOffLogInBtn.jsx';
-import Sidebar from './Sidebar.jsx';
 import EmotionDisplay from './EmotionDisplay.jsx';
 
 const Header = ({ handleEmotion, emotion }) => {
+    const [viewportHeight, setViewportHeight] = useState(window.innerHeight); // used to alter the viewportHeight depending on window size
+    const [searchValue, setSearchValue] = useState("") // used in search bar
+
     const navigate = useNavigate();
     const logoOnClick = () => {
+        // navigates the user to the root directory when clicking the 'logo' in the top left corner of the page.
+        // Root serves the Home component
         navigate('/')
     }
-    
-    //---
-    const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
-    const [searchValue, setSearchValue] = useState("")
 
     useEffect(() => {
-      // Update the viewportHeight whenever the window is resized
+      // For when I used viewportHeight in CSS to help deal with the resizing of the window
       const handleResize = () => {
         setViewportHeight(window.innerHeight);
       };
-  
       window.addEventListener('resize', handleResize);
-  
       return () => {
         window.removeEventListener('resize', handleResize);
       };
     }, []);
 
-    //--- 
-
     const handleSearch = () => {
+        // Takes the emotion typed into the search bar and updates state.
+        // handleEmotion initially comes from LandingPages.jsx 
         handleEmotion(searchValue);
     };
 
     const handleInputChange = (event) => {
+        // Helps update searchValue state when the user types in the search bar
         setSearchValue(event.target.value);
     };
 
@@ -89,8 +88,5 @@ const Header = ({ handleEmotion, emotion }) => {
     )
     
 }
-
-
-
 
 export default Header;
