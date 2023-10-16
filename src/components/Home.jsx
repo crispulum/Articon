@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 const Home = ({ handleEmotion }) => {
-    // this is how we'll navigate to different emotion pages
-   
-    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
 
+    const navigate = useNavigate();
+
+    // these 2 functions navigate the user to either the signup page or login page
     const signupOnClick = (e) => {
         e.preventDefault();
         navigate("/signup")
@@ -15,11 +15,11 @@ const Home = ({ handleEmotion }) => {
         e.preventDefault();
         navigate("/login")
     }
+
+    // sends the user to the main route
+    // updates the emotion state initially found in LandingPages
     const handleSearch = () => {
         handleEmotion(searchValue);
-    //     if (searchValue === 'test') {
-    //       navigate('/main');
-    //  }
         navigate('/main');
     };
 

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
  import Cookies from 'js-cookie';
 
 const Sidebar = ({ handleEmotion }) => {
-    
-    
     const [username, setUsername] = useState("");
 
     const onClickEmotionsBtn = (emotion) => {
