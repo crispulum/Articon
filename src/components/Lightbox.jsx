@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function Lightbox({ art, onClose }) {
+
   const [copied, setCopied] = useState(false);
   const [score, setScore] = useState(art.score);
 
@@ -31,6 +32,7 @@ function Lightbox({ art, onClose }) {
       score: voteType
     };
 
+    //sending the patch request to the DB that updates the score
     fetch('/art/vote', {
       method: 'PATCH',
       headers: {
@@ -42,7 +44,7 @@ function Lightbox({ art, onClose }) {
         if (response.ok) {
           response.json()
             .then((data) => {
-              setScore(data.score); // Update the score from the response
+              setScore(data.score); // Live update the score from the response
             });
         } else {
           console.error('Vote request failed:', response.statusText);
