@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 function ArtVerification({ art, emotion, confirmArt, denyArt, onClose }) {
+
+  //setting up this object format for the DB
   const [verificationData, setVerificationData] = useState({
     title: art.title || '',
     artist: art.artist || '',
@@ -22,6 +24,7 @@ function ArtVerification({ art, emotion, confirmArt, denyArt, onClose }) {
       thumbnailURL: art.thumbnailURL,
       url: art.url
     });
+    console.log(verificationData)
   };
 
   useEffect(() => {

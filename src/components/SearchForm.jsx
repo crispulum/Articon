@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-function SearchForm({ onSubmit, onClose, onAddArt }) {
+function SearchForm({ onSubmit, onClose }) {
+
+
   const [formData, setFormData] = useState({
     artist: '',
-    title: '',
-    emotion: ''
+    title: ''
   });
 
   const handleInputChange = (event) => {
