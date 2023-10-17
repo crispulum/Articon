@@ -11,8 +11,6 @@ const Login = () => {
         password: ""
     }); 
     
-    
-
     function setCookie() {
         // Set a cookie named "username" with the value from formData.username
         Cookies.set('username', formData.username);
@@ -32,7 +30,7 @@ const Login = () => {
             }
         })
         .then(data => {
-            console.log(data);
+            // set the cookie and navigate the user to the Home page
             setCookie();
             navigate('/');
         })

@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
 
 import ImageGallery from './ImageGallery';
 import Header from './Header';

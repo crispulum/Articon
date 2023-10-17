@@ -2,6 +2,10 @@ import React, {useEffect, useState} from 'react';
 
 
 const EmotionDisplay = ({emotion}) => {
+    /**
+     * This component is for displaying the current emotion that is being focused
+     * on for the main page.
+     */
     const [displayedEmotion, setDisplayedEmotion] = useState('happy');
     
     useEffect(() => {
