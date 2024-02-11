@@ -20,8 +20,7 @@ app.use(cookieParser());
 
 // MongoDB Connection
 
-const MONGO_URI = `mongodb+srv://bibaswe:${process.env.MONGO_PWD}@articoncluster.oobwhak.mongodb.net/articondb?retryWrites=true&w=majority`;
-
+const MONGO_URI = `mongodb+srv://crispulum:${process.env.MONGO_PWD}@articon.adcbp9b.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

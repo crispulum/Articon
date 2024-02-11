@@ -10,6 +10,7 @@ module.exports = {
     path: path.join(__dirname, "/build"),
     publicPath: "/"
   },
+  devtool: 'source-map',
   devServer: {
     // static: {
     //   directory: path.resolve(__dirname, "dist"),
