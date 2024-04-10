@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SignOffLogInBtn from './SignOffLogInBtn.jsx';
 import Sidebar from './Sidebar.jsx';
-
 const Header = ({ handleEmotion }) => {
     const navigate = useNavigate();
     const logoOnClick = () => {

@@ -35,10 +35,14 @@ function ImageGallery({ emotion }) {
         },
       })
         .then((response) => {
+          console.log('data fetched!')
+          console.log(response)
             return response.json()
         })
         .then((data) => {
+          console.log('data fetched!')
             setArtData(data);
+            console.log('is artData')
             console.log(artData)
         });
     }, [emotion]);
